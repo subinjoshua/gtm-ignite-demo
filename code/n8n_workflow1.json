@@ -1,0 +1,527 @@
+{
+  "name": "Instantly Reply Handler - Production",
+  "meta": {
+    "version": "2.0",
+    "description": "Full reply handling with sentiment classification, auto-pause, and smart routing"
+  },
+  "nodes": [
+    {
+      "id": "webhook-trigger",
+      "name": "Instantly Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [100, 400],
+      "webhookId": "instantly-reply-handler",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "instantly-reply",
+        "responseMode": "onReceived",
+        "responseCode": 200
+      }
+    },
+    {
+      "id": "parse-normalize",
+      "name": "Parse & Normalize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [300, 400],
+      "parameters": {
+        "jsCode": "// Parse and normalize incoming webhook payload\nconst body = $input.first().json;\n\nconst normalized = {\n  lead_email: (body.email || body.lead_email || '').toLowerCase().trim(),\n  reply_text: body.reply || body.reply_text || body.message_text || '',\n  reply_lower: (body.reply || body.reply_text || body.message_text || '').toLowerCase(),\n  campaign_id: body.campaign_id,\n  subject: body.subject || '',\n  timestamp: body.timestamp || new Date().toISOString(),\n  message_id: body.message_id || body.event_id || crypto.randomUUID(),\n  lead_first_name: body.lead_first_name || body.first_name || '',\n  lead_last_name: body.lead_last_name || body.last_name || '',\n  company_name: body.company_name || ''\n};\n\nreturn [{ json: normalized }];"
+      }
+    },
+    {
+      "id": "dedupe-check",
+      "name": "Dedupe Check",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [500, 400],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id FROM interactions WHERE message_id = '{{ $json.message_id }}' LIMIT 1"
+      }
+    },
+    {
+      "id": "if-duplicate",
+      "name": "Is Duplicate?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [700, 400],
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.length || 0 }}",
+              "operation": "larger",
+              "value2": 0
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "stop-duplicate",
+      "name": "Stop - Duplicate",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [900, 280]
+    },
+    {
+      "id": "classify-reply",
+      "name": "Classify Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 500],
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst reply = data.reply_lower || '';\n\n// Classification patterns\nconst patterns = {\n  ooo_bounce: [\n    'out of office', 'out of the office', 'ooo', 'auto-reply', 'automatic reply',\n    'on vacation', 'on leave', 'away from', 'currently out',\n    'no longer with', 'left the district', 'no longer employed',\n    'delivery failed', 'undeliverable', 'mailbox full', 'address rejected',\n    'retired', 'no longer working'\n  ],\n  unsubscribe: [\n    'unsubscribe', 'remove me', 'opt out', 'opt-out', 'stop emailing',\n    'take me off', 'do not contact', 'don\\'t contact', 'dont contact',\n    'remove from list', 'stop contacting', 'cease contact',\n    'no more emails', 'stop sending'\n  ],\n  negative: [\n    'not interested', 'no thank', 'no thanks', 'pass on this',\n    'not a good fit', 'not for us', 'don\\'t need', 'dont need',\n    'already have', 'not looking', 'no budget', 'budget constraints',\n    'wrong person', 'not my area', 'not my department',\n    'not at this time', 'maybe next year', 'not a priority',\n    'we\\'re good', 'we are good', 'all set', 'not the right time'\n  ],\n  hot: [\n    'schedule', 'calendar', 'meet', 'meeting', 'call me', 'give me a call',\n    'let\\'s talk', 'lets talk', 'let\\'s chat', 'lets chat',\n    'set up time', 'set up a time', 'book', 'book a call',\n    'available', 'free to chat', 'free to talk',\n    'interested', 'very interested', 'definitely interested',\n    'tell me more', 'send more info', 'send info', 'more information',\n    'learn more', 'demo', 'show me', 'presentation',\n    'sounds good', 'sounds great', 'love to hear more',\n    'reach out', 'give you a call', 'connect'\n  ]\n};\n\nlet classification = 'neutral';\nlet confidence = 'low';\nlet matched_keyword = '';\n\nfor (const [type, keywords] of Object.entries(patterns)) {\n  for (const keyword of keywords) {\n    if (reply.includes(keyword)) {\n      classification = type;\n      confidence = 'high';\n      matched_keyword = keyword;\n      break;\n    }\n  }\n  if (confidence === 'high') break;\n}\n\n// Determine required actions\nconst requires_pause = ['unsubscribe', 'negative', 'hot', 'neutral'].includes(classification);\nconst requires_alert = ['negative', 'hot', 'neutral'].includes(classification);\nconst is_actionable = classification !== 'ooo_bounce';\n\nreturn [{\n  json: {\n    ...data,\n    classification,\n    confidence,\n    matched_keyword,\n    requires_pause,\n    requires_alert,\n    is_actionable\n  }\n}];"
+      }
+    },
+    {
+      "id": "log-to-db",
+      "name": "Log to Database",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1100, 500],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO interactions (lead_email, type, reply_text, classification, confidence, message_id, campaign_id, created_at)\nVALUES (\n  '{{ $json.lead_email }}',\n  'reply',\n  '{{ $json.reply_text | replace(\"'\", \"''\") }}',\n  '{{ $json.classification }}',\n  '{{ $json.confidence }}',\n  '{{ $json.message_id }}',\n  '{{ $json.campaign_id }}',\n  '{{ $json.timestamp }}'\n);"
+      }
+    },
+    {
+      "id": "route-by-type",
+      "name": "Route by Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [1300, 500],
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.classification }}",
+        "rules": {
+          "rules": [
+            { "value2": "ooo_bounce", "output": 0 },
+            { "value2": "unsubscribe", "output": 1 },
+            { "value2": "negative", "output": 2 },
+            { "value2": "hot", "output": 3 },
+            { "value2": "neutral", "output": 4 }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ooo-handler",
+      "name": "OOO/Bounce - Update Status",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1550, 150],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE leads SET status = 'ooo_bounce', updated_at = NOW() WHERE email = '{{ $json.lead_email }}';"
+      }
+    },
+    {
+      "id": "unsub-update-status",
+      "name": "Update Status - Unsubscribed",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1550, 300],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "-- Add to suppression list\nINSERT INTO suppression_list (email, reason, created_at)\nVALUES ('{{ $json.lead_email }}', 'user_request', NOW())\nON CONFLICT (email) DO NOTHING;\n\n-- Update lead status\nUPDATE leads SET status = 'unsubscribed', updated_at = NOW() WHERE email = '{{ $json.lead_email }}';"
+      }
+    },
+    {
+      "id": "unsub-pause-instantly",
+      "name": "Pause Instantly - Unsub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1800, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.instantly.ai/api/v1/lead/delete",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "campaign_id", "value": "={{ $json.campaign_id }}" },
+            { "name": "delete_all_from_company", "value": "false" },
+            { "name": "email", "value": "={{ $json.lead_email }}" }
+          ]
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": { "id": "instantly-api", "name": "Instantly API" }
+      }
+    },
+    {
+      "id": "negative-update-status",
+      "name": "Update Status - Not Interested",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1550, 450],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE leads SET status = 'not_interested', updated_at = NOW() WHERE email = '{{ $json.lead_email }}';"
+      }
+    },
+    {
+      "id": "negative-slack",
+      "name": "Slack - Negative Reply",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [1800, 450],
+      "credentials": {
+        "slackApi": { "id": "slack-gtm", "name": "GTM Slack Bot" }
+      },
+      "parameters": {
+        "channel": "#gtm-replies",
+        "text": "👎 *Negative Reply*\n\n*From:* {{ $json.lead_email }}\n*Name:* {{ $json.lead_first_name }} {{ $json.lead_last_name }}\n*Campaign:* {{ $json.campaign_id }}\n*Detected:* \"{{ $json.matched_keyword }}\"\n\n>>> {{ $json.reply_text }}\n\n_Lead auto-paused in sequence._"
+      }
+    },
+    {
+      "id": "negative-pause-instantly",
+      "name": "Pause Instantly - Negative",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2050, 450],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.instantly.ai/api/v1/lead/status/update",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "campaign_id", "value": "={{ $json.campaign_id }}" },
+            { "name": "email", "value": "={{ $json.lead_email }}" },
+            { "name": "new_status", "value": "Paused" }
+          ]
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": { "id": "instantly-api", "name": "Instantly API" }
+      }
+    },
+    {
+      "id": "hot-update-status",
+      "name": "Update Status - Hot Lead",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1550, 600],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE leads SET status = 'hot_reply', score_tier = 'hot', updated_at = NOW() WHERE email = '{{ $json.lead_email }}';"
+      }
+    },
+    {
+      "id": "hot-get-details",
+      "name": "Get Lead Details",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1800, 600],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT l.full_name, l.title, l.lead_score, d.name as district, d.enrollment, d.city\nFROM leads l\nJOIN districts d ON l.district_id = d.id\nWHERE l.email = '{{ $json.lead_email }}'\nLIMIT 1;"
+      }
+    },
+    {
+      "id": "hot-merge-data",
+      "name": "Merge Lead Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2000, 600],
+      "parameters": {
+        "jsCode": "// Merge original data with lead details from DB\nconst original = $('Classify Reply').first().json;\nconst leadDetails = $input.first().json;\n\nreturn [{\n  json: {\n    ...original,\n    full_name: leadDetails.full_name || `${original.lead_first_name} ${original.lead_last_name}`,\n    title: leadDetails.title || 'Unknown',\n    district: leadDetails.district || original.company_name || 'Unknown District',\n    enrollment: leadDetails.enrollment || 'N/A',\n    city: leadDetails.city || '',\n    lead_score: leadDetails.lead_score || 0\n  }\n}];"
+      }
+    },
+    {
+      "id": "hot-slack",
+      "name": "Slack - Hot Lead Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [2200, 600],
+      "credentials": {
+        "slackApi": { "id": "slack-gtm", "name": "GTM Slack Bot" }
+      },
+      "parameters": {
+        "channel": "#gtm-hot-leads",
+        "text": "🔥 *HOT LEAD - Meeting Request!*",
+        "attachments": [],
+        "otherOptions": {
+          "blocks": [
+            {
+              "type": "header",
+              "text": { "type": "plain_text", "text": "🔥 HOT LEAD - Meeting Request!" }
+            },
+            {
+              "type": "section",
+              "fields": [
+                { "type": "mrkdwn", "text": "*Contact:*\n{{ $json.full_name }}" },
+                { "type": "mrkdwn", "text": "*Title:*\n{{ $json.title }}" },
+                { "type": "mrkdwn", "text": "*District:*\n{{ $json.district }}" },
+                { "type": "mrkdwn", "text": "*Enrollment:*\n{{ $json.enrollment }} students" },
+                { "type": "mrkdwn", "text": "*Lead Score:*\n{{ $json.lead_score }}" },
+                { "type": "mrkdwn", "text": "*Email:*\n{{ $json.lead_email }}" }
+              ]
+            },
+            {
+              "type": "section",
+              "text": { "type": "mrkdwn", "text": "*Their Reply:*\n>>> {{ $json.reply_text }}" }
+            },
+            {
+              "type": "section",
+              "text": { "type": "mrkdwn", "text": "_Detected keyword: \"{{ $json.matched_keyword }}\"_" }
+            },
+            {
+              "type": "actions",
+              "elements": [
+                {
+                  "type": "button",
+                  "text": { "type": "plain_text", "text": "📅 Send Calendar Link" },
+                  "style": "primary",
+                  "url": "mailto:{{ $json.lead_email }}?subject=Re: {{ $json.subject }}&body=Hi {{ $json.lead_first_name }},%0A%0AGreat to hear from you! Here's my calendar link to find a time that works:%0A%0Ahttps://calendly.com/your-link%0A%0ALooking forward to connecting!"
+                },
+                {
+                  "type": "button",
+                  "text": { "type": "plain_text", "text": "Reply Now" },
+                  "url": "mailto:{{ $json.lead_email }}?subject=Re: {{ $json.subject }}"
+                },
+                {
+                  "type": "button",
+                  "text": { "type": "plain_text", "text": "View in Instantly" },
+                  "url": "https://app.instantly.ai/app/campaigns/{{ $json.campaign_id }}"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "hot-pause-instantly",
+      "name": "Pause Instantly - Hot",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2400, 600],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.instantly.ai/api/v1/lead/status/update",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "campaign_id", "value": "={{ $json.campaign_id }}" },
+            { "name": "email", "value": "={{ $json.lead_email }}" },
+            { "name": "new_status", "value": "Completed" }
+          ]
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": { "id": "instantly-api", "name": "Instantly API" }
+      }
+    },
+    {
+      "id": "hot-log-alert",
+      "name": "Log Hot Lead Alert",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [2600, 600],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO slack_alerts (lead_email, alert_type, channel, message, sent_at)\nVALUES ('{{ $json.lead_email }}', 'hot_lead', '#gtm-hot-leads', 'Meeting request detected', NOW());"
+      }
+    },
+    {
+      "id": "neutral-update-status",
+      "name": "Update Status - Replied",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [1550, 750],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE leads SET status = 'replied', updated_at = NOW() WHERE email = '{{ $json.lead_email }}';"
+      }
+    },
+    {
+      "id": "neutral-slack",
+      "name": "Slack - Neutral Reply",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [1800, 750],
+      "credentials": {
+        "slackApi": { "id": "slack-gtm", "name": "GTM Slack Bot" }
+      },
+      "parameters": {
+        "channel": "#gtm-replies",
+        "text": "💬 *New Reply* (needs review)\n\n*From:* {{ $json.lead_email }}\n*Name:* {{ $json.lead_first_name }} {{ $json.lead_last_name }}\n*Campaign:* {{ $json.campaign_id }}\n\n>>> {{ $json.reply_text }}\n\n_Sequence paused - manual follow-up needed._\n\n<mailto:{{ $json.lead_email }}?subject=Re: {{ $json.subject }}|Reply Now>"
+      }
+    },
+    {
+      "id": "neutral-pause-instantly",
+      "name": "Pause Instantly - Neutral",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2050, 750],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.instantly.ai/api/v1/lead/status/update",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "campaign_id", "value": "={{ $json.campaign_id }}" },
+            { "name": "email", "value": "={{ $json.lead_email }}" },
+            { "name": "new_status", "value": "Paused" }
+          ]
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": { "id": "instantly-api", "name": "Instantly API" }
+      }
+    },
+    {
+      "id": "error-trigger",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [100, 700]
+    },
+    {
+      "id": "error-log",
+      "name": "Log Error to DB",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [300, 700],
+      "credentials": {
+        "postgres": { "id": "postgres-gtm", "name": "GTM Database" }
+      },
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO workflow_errors (workflow_name, error_message, error_stack, payload, created_at)\nVALUES (\n  'instantly_reply_handler',\n  '{{ $json.error.message | replace(\"'\", \"''\") }}',\n  '{{ $json.error.stack | replace(\"'\", \"''\") }}',\n  '{{ JSON.stringify($json) | replace(\"'\", \"''\") }}',\n  NOW()\n);"
+      }
+    },
+    {
+      "id": "error-slack",
+      "name": "Slack - Error Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [500, 700],
+      "credentials": {
+        "slackApi": { "id": "slack-gtm", "name": "GTM Slack Bot" }
+      },
+      "parameters": {
+        "channel": "#gtm-errors",
+        "text": "⚠️ *Workflow Error*\n\n*Workflow:* Instantly Reply Handler\n*Error:* {{ $json.error.message }}\n*Node:* {{ $json.error.node }}\n\n_Check workflow_errors table for full details._"
+      }
+    }
+  ],
+  "connections": {
+    "Instantly Webhook": {
+      "main": [[{ "node": "Parse & Normalize", "type": "main", "index": 0 }]]
+    },
+    "Parse & Normalize": {
+      "main": [[{ "node": "Dedupe Check", "type": "main", "index": 0 }]]
+    },
+    "Dedupe Check": {
+      "main": [[{ "node": "Is Duplicate?", "type": "main", "index": 0 }]]
+    },
+    "Is Duplicate?": {
+      "main": [
+        [{ "node": "Stop - Duplicate", "type": "main", "index": 0 }],
+        [{ "node": "Classify Reply", "type": "main", "index": 0 }]
+      ]
+    },
+    "Classify Reply": {
+      "main": [[{ "node": "Log to Database", "type": "main", "index": 0 }]]
+    },
+    "Log to Database": {
+      "main": [[{ "node": "Route by Type", "type": "main", "index": 0 }]]
+    },
+    "Route by Type": {
+      "main": [
+        [{ "node": "OOO/Bounce - Update Status", "type": "main", "index": 0 }],
+        [{ "node": "Update Status - Unsubscribed", "type": "main", "index": 0 }],
+        [{ "node": "Update Status - Not Interested", "type": "main", "index": 0 }],
+        [{ "node": "Update Status - Hot Lead", "type": "main", "index": 0 }],
+        [{ "node": "Update Status - Replied", "type": "main", "index": 0 }]
+      ]
+    },
+    "Update Status - Unsubscribed": {
+      "main": [[{ "node": "Pause Instantly - Unsub", "type": "main", "index": 0 }]]
+    },
+    "Update Status - Not Interested": {
+      "main": [[{ "node": "Slack - Negative Reply", "type": "main", "index": 0 }]]
+    },
+    "Slack - Negative Reply": {
+      "main": [[{ "node": "Pause Instantly - Negative", "type": "main", "index": 0 }]]
+    },
+    "Update Status - Hot Lead": {
+      "main": [[{ "node": "Get Lead Details", "type": "main", "index": 0 }]]
+    },
+    "Get Lead Details": {
+      "main": [[{ "node": "Merge Lead Data", "type": "main", "index": 0 }]]
+    },
+    "Merge Lead Data": {
+      "main": [[{ "node": "Slack - Hot Lead Alert", "type": "main", "index": 0 }]]
+    },
+    "Slack - Hot Lead Alert": {
+      "main": [[{ "node": "Pause Instantly - Hot", "type": "main", "index": 0 }]]
+    },
+    "Pause Instantly - Hot": {
+      "main": [[{ "node": "Log Hot Lead Alert", "type": "main", "index": 0 }]]
+    },
+    "Update Status - Replied": {
+      "main": [[{ "node": "Slack - Neutral Reply", "type": "main", "index": 0 }]]
+    },
+    "Slack - Neutral Reply": {
+      "main": [[{ "node": "Pause Instantly - Neutral", "type": "main", "index": 0 }]]
+    },
+    "Error Trigger": {
+      "main": [[{ "node": "Log Error to DB", "type": "main", "index": 0 }]]
+    },
+    "Log Error to DB": {
+      "main": [[{ "node": "Slack - Error Alert", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true,
+    "saveManualExecutions": true
+  },
+  "tags": [
+    { "name": "gtm", "id": "tag-gtm" },
+    { "name": "instantly", "id": "tag-instantly" },
+    { "name": "production", "id": "tag-prod" }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-15T00:00:00.000Z",
+  "versionId": "2.0"
+}

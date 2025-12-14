@@ -1,0 +1,178 @@
+# Ambient.ai Cold Email Templates with Spintax
+# =============================================
+# 
+# Spintax syntax: {option1|option2|option3}
+# Variables: {{first_name}}, {{district}}, {{city}}, {{enrollment}}
+#
+# Each email generates unique variations to improve deliverability
+# and allow A/B testing at scale.
+
+================================================================================
+CAMPAIGN: TX Superintendents Q1 2026
+SEQUENCE: 3 emails over 10 days
+================================================================================
+
+--------------------------------------------------------------------------------
+EMAIL 1: Initial Outreach (Day 0)
+--------------------------------------------------------------------------------
+
+SUBJECT VARIATIONS:
+{Quick question|Brief question|Thinking about} {{district}} {security|safety|campus security}
+{After Antioch|Following January's incident|Since the Antioch shooting} - {quick question|a thought|brief note}
+{{first_name}}, {15 minutes|quick call|brief chat} on {{district}} security?
+{Saw|Noticed|Read about} {{district}}'s {growth|expansion} - {security question|safety thought}
+{Question for|Reaching out to|Note for} {{district}} leadership
+
+BODY:
+
+{Hi|Hey|Hello} {{first_name}},
+
+{After Antioch|Following the Antioch incident|Since January}, {superintendents|district leaders|school administrators} {across Texas|in the state|like yourself} are {rethinking|reconsidering|re-evaluating} their {security approach|safety strategy|protection systems}.
+
+The {issue|problem|challenge} {I keep hearing|that comes up|we've identified}: {most AI systems|current solutions|existing technology} {only detect visible weapons|can't see concealed threats|miss the warning signs} — {meaning|which means|so} they {fail|don't help|are useless} {until it's too late|when it matters most|in the critical moment}.
+
+{Ambient.ai|We|Our system} {detects|identifies|spots} {threatening behavior|dangerous patterns|pre-attack indicators} — {before|moments before|well before} a weapon {appears|is drawn|becomes visible}. {It's|This is|That's} {the difference between|what separates} {prevention|stopping an attack} and {response|reacting to one}.
+
+{Worth a 15-min call|Open to a brief chat|Can we connect for 15 minutes} {this week|in the next few days|soon}? {I can show you|Happy to walk through|I'd love to demonstrate} {exactly|specifically} how {it works|this applies to} {{district}}.
+
+{Best|Thanks|Cheers},
+{{sender_name}}
+
+{P.S.|PS:|BTW:} {We're working with|Already partnered with|Currently deployed in} {several|a few|multiple} Texas districts {your size|with similar enrollment}. {Happy to share|Can share|I can provide} {what's working|their results|case studies}.
+
+--------------------------------------------------------------------------------
+EMAIL 2: Follow-up (Day 3)
+--------------------------------------------------------------------------------
+
+SUBJECT VARIATIONS:
+Re: {Quick question|Brief question} {{district}} security
+Re: {{first_name}} - {following up|quick follow up|circling back}
+{Bumping this up|Moving this up|Quick bump} - {{district}} security
+
+BODY:
+
+{{first_name}},
+
+{Quick follow-up|Circling back|Bumping this up} on my {note|email|message} {from|sent} {a few days ago|earlier this week|Monday}.
+
+{I know|Understand|I'm sure} {you're slammed|things are busy|your plate is full} — {especially|particularly} with {Alyssa's Law compliance|the 2025-2026 deadline|state requirements} {coming up|on the horizon|approaching}.
+
+{One thing|Something|A point} that {might help|could be useful|may interest you}: {Ambient.ai|our system|we} can {integrate with|work with|connect to} your {existing cameras|current infrastructure|Verkada/Rhombus setup} — {no rip-and-replace|no new hardware|just software}.
+
+{15 minutes|A quick call|Brief chat} {this week|soon}?
+
+{{sender_name}}
+
+--------------------------------------------------------------------------------
+EMAIL 3: Breakup (Day 8)
+--------------------------------------------------------------------------------
+
+SUBJECT VARIATIONS:
+{Last try|Final note|Closing the loop} - {{district}}
+{{first_name}} - {should I close this out?|one last thought|final note}
+{Timing not right?|Bad timing?|Not the right moment?}
+
+BODY:
+
+{{first_name}},
+
+{I'll keep this short|Quick note|Last one from me} — {I know|I understand|I get it} {timing is everything|you're busy|not every outreach lands at the right moment}.
+
+If {campus security|school safety|protecting your students} {isn't a priority right now|is handled|isn't top of mind}, {no worries|totally understand|all good}. {I'll|Happy to} {close this out|move on|step back}.
+
+But if {Antioch|recent events|what happened in January} {changed your thinking|shifted priorities|raised concerns}, {I'm here|happy to chat|reach out anytime}.
+
+{Either way|Regardless|In any case}, {wishing|hoping for} a {safe|great|smooth} {semester|spring|rest of the year} for {{district}}.
+
+{Best|Take care|Cheers},
+{{sender_name}}
+
+================================================================================
+CAMPAIGN: TX Safety Directors Q1 2026
+SEQUENCE: 3 emails over 10 days
+================================================================================
+
+--------------------------------------------------------------------------------
+EMAIL 1: Initial Outreach (Day 0)
+--------------------------------------------------------------------------------
+
+SUBJECT VARIATIONS:
+{Question for|Note for|Reaching out to} {{district}} {security|safety} team
+{Concealed weapons|Hidden threats|Pre-attack detection} - {quick question|thought for you}
+{{first_name}}, {AI that actually works|beyond metal detectors|before the weapon appears}
+{From one security pro to another|Security pro to security pro} - {quick thought|brief note}
+
+BODY:
+
+{Hi|Hey|Hello} {{first_name}},
+
+{Reaching out|Writing|Connecting} {because|since} {you're|you seem to be|I noticed you're} {on the front lines of|leading|responsible for} {campus safety|security|student protection} at {{district}}.
+
+{Quick question|Honest question|Curious}: {How confident are you|How do you feel|What's your take on} your {current system's|existing setup's|technology's} ability to {detect a concealed weapon|spot hidden threats|catch something before it's visible}?
+
+{Most systems|Metal detectors and AI cameras|Current solutions} {can't|don't|won't} — {they only work|they're designed for} {once the weapon is out|visible threats|what they can see}.
+
+{Ambient.ai|We|Our platform} {detects|identifies|flags} {threatening behavior|dangerous patterns|pre-attack indicators} — {aggression|agitation|erratic movement|concealment behavior} — {before|well before|moments before} {a weapon appears|anything is visible|the attack begins}.
+
+{Worth 15 minutes|Can we chat for 15|Open to a quick call} to {walk through|show you|demonstrate} how {this|it} {would work|could integrate|fits} with your {current setup|existing cameras|infrastructure}?
+
+{Best|Thanks|Cheers},
+{{sender_name}}
+
+--------------------------------------------------------------------------------
+EMAIL 2 & 3: Similar structure to Superintendent campaign
+--------------------------------------------------------------------------------
+[Variations follow same pattern - shorter, more technical focus]
+
+
+================================================================================
+SPINTAX PROCESSING NOTES
+================================================================================
+
+1. Total unique variations per email: ~500+ combinations
+2. Processing: Use Python spintax library or custom regex
+3. Variables replaced at send time from lead data
+4. A/B test by tracking which variations get responses
+
+Example Python processing:
+
+```python
+import re
+import random
+
+def process_spintax(text):
+    """Replace {option1|option2|option3} with random choice"""
+    pattern = r'\{([^{}]+)\}'
+    
+    def replace(match):
+        options = match.group(1).split('|')
+        return random.choice(options)
+    
+    while re.search(pattern, text):
+        text = re.sub(pattern, replace, text, count=1)
+    
+    return text
+
+def replace_variables(text, lead):
+    """Replace {{variable}} with lead data"""
+    for key, value in lead.items():
+        text = text.replace('{{' + key + '}}', str(value))
+    return text
+```
+
+================================================================================
+A/B TEST TRACKING
+================================================================================
+
+Track which subject line variations get:
+- Highest open rate
+- Highest reply rate
+- Most meetings booked
+
+After 50+ sends per variation, double down on winners.
+
+Current hypothesis to test:
+- "After Antioch" urgency vs. neutral subject
+- Short vs. detailed email body
+- With P.S. vs. without
+- Question CTA vs. statement CTA

@@ -1,0 +1,249 @@
+{
+  "name": "Instantly Reply Handler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "instantly-webhook",
+        "responseMode": "onReceived",
+        "responseData": "allEntries"
+      },
+      "id": "webhook-trigger",
+      "name": "Instantly Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "instantly-reply-handler"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse Instantly webhook payload\nconst payload = $input.all()[0].json;\n\nconst event = {\n  event_type: payload.event_type || 'reply',\n  lead_email: payload.lead_email || payload.email,\n  campaign_id: payload.campaign_id,\n  reply_text: payload.reply_text || payload.message_text || '',\n  subject: payload.subject || '',\n  timestamp: payload.timestamp || new Date().toISOString(),\n  \n  // Extract lead info\n  lead_first_name: payload.lead_first_name || payload.first_name || '',\n  lead_last_name: payload.lead_last_name || payload.last_name || '',\n  company_name: payload.company_name || '',\n  \n  // Determine sentiment (basic)\n  sentiment: detectSentiment(payload.reply_text || '')\n};\n\nfunction detectSentiment(text) {\n  const positive = ['interested', 'yes', 'schedule', 'call', 'meet', 'love', 'great'];\n  const negative = ['no', 'not interested', 'unsubscribe', 'remove', 'stop'];\n  \n  const lower = text.toLowerCase();\n  \n  if (positive.some(word => lower.includes(word))) return 'positive';\n  if (negative.some(word => lower.includes(word))) return 'negative';\n  return 'neutral';\n}\n\nreturn [{ json: event }];"
+      },
+      "id": "parse-payload",
+      "name": "Parse Webhook",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO interactions (lead_id, campaign_id, type, subject, content, sentiment, instantly_event_id, occurred_at)\nSELECT \n  l.id,\n  c.id,\n  '{{ $json.event_type }}',\n  '{{ $json.subject }}',\n  '{{ $json.reply_text }}',\n  '{{ $json.sentiment }}',\n  '{{ $json.event_id }}',\n  '{{ $json.timestamp }}'\nFROM leads l\nLEFT JOIN campaigns c ON c.instantly_campaign_id = '{{ $json.campaign_id }}'\nWHERE l.email = '{{ $json.lead_email }}';\n\n-- Update lead status\nUPDATE leads \nSET status = CASE \n  WHEN '{{ $json.event_type }}' = 'reply' THEN 'replied'\n  WHEN '{{ $json.event_type }}' = 'open' THEN 'opened'\n  ELSE status\nEND,\nupdated_at = NOW()\nWHERE email = '{{ $json.lead_email }}';"
+      },
+      "id": "postgres-log",
+      "name": "Log to PostgreSQL",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [650, 200],
+      "credentials": {
+        "postgres": {
+          "id": "postgres-gtm",
+          "name": "GTM Database"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.event_type }}",
+              "operation": "equals",
+              "value2": "reply"
+            }
+          ]
+        }
+      },
+      "id": "if-reply",
+      "name": "Is Reply?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [650, 400]
+    },
+    {
+      "parameters": {
+        "channel": "#gtm-alerts",
+        "text": "🔥 *New Reply from Campaign Lead*",
+        "attachments": [],
+        "otherOptions": {
+          "blocks": [
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "*{{ $json.lead_first_name }} {{ $json.lead_last_name }}* from *{{ $json.company_name }}*"
+              }
+            },
+            {
+              "type": "section",
+              "fields": [
+                {
+                  "type": "mrkdwn",
+                  "text": "*Email:*\n{{ $json.lead_email }}"
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": "*Sentiment:*\n{{ $json.sentiment }}"
+                }
+              ]
+            },
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "*Reply Preview:*\n> {{ $json.reply_text | truncate(200) }}"
+              }
+            },
+            {
+              "type": "actions",
+              "elements": [
+                {
+                  "type": "button",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "View in Instantly"
+                  },
+                  "url": "https://app.instantly.ai/app/campaigns/{{ $json.campaign_id }}"
+                },
+                {
+                  "type": "button",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Reply Now"
+                  },
+                  "style": "primary",
+                  "url": "mailto:{{ $json.lead_email }}?subject=Re: {{ $json.subject }}"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "id": "slack-alert",
+      "name": "Slack Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [850, 400],
+      "credentials": {
+        "slackApi": {
+          "id": "slack-gtm",
+          "name": "GTM Slack Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.sentiment }}",
+              "operation": "equals",
+              "value2": "positive"
+            }
+          ]
+        }
+      },
+      "id": "if-hot-lead",
+      "name": "Hot Lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1050, 400]
+    },
+    {
+      "parameters": {
+        "channel": "#gtm-hot-leads",
+        "text": "🎯 *HOT LEAD - Positive Reply!*\n\n*{{ $json.lead_first_name }} {{ $json.lead_last_name }}* at *{{ $json.company_name }}* replied positively!\n\n> {{ $json.reply_text | truncate(300) }}\n\n<mailto:{{ $json.lead_email }}|Reply Now>"
+      },
+      "id": "slack-hot-lead",
+      "name": "Hot Lead Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [1250, 300],
+      "credentials": {
+        "slackApi": {
+          "id": "slack-gtm",
+          "name": "GTM Slack Bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Instantly Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Webhook": {
+      "main": [
+        [
+          {
+            "node": "Log to PostgreSQL",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Is Reply?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Reply?": {
+      "main": [
+        [
+          {
+            "node": "Slack Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack Alert": {
+      "main": [
+        [
+          {
+            "node": "Hot Lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hot Lead?": {
+      "main": [
+        [
+          {
+            "node": "Hot Lead Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "name": "gtm",
+      "id": "tag-gtm"
+    },
+    {
+      "name": "instantly",
+      "id": "tag-instantly"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-15T00:00:00.000Z",
+  "versionId": "1"
+}

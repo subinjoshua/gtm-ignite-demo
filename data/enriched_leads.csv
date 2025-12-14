@@ -1,0 +1,135 @@
+district_name,city,enrollment,tier,full_name,title,email,phone,linkedin_url,persona,lead_score,score_tier,has_safety_director,enriched_at
+Leander ISD,Leander,42000,sweet_spot,Dr. Bruce Gearing,Superintendent,bruce.gearing@leanderisd.org,512-570-0000,linkedin.com/in/bruce-gearing,superintendent,92,hot,TRUE,2025-01-14
+Leander ISD,Leander,42000,sweet_spot,Shā Rogers,Chief of Safety & Security,sha.rogers@leanderisd.org,512-570-0010,linkedin.com/in/sha-rogers,safety_director,95,hot,TRUE,2025-01-14
+Keller ISD,Keller,34500,sweet_spot,Dr. Rick Westfall,Superintendent,rick.westfall@kellerisd.net,817-744-1000,linkedin.com/in/rick-westfall,superintendent,88,hot,TRUE,2025-01-14
+Keller ISD,Keller,34500,sweet_spot,Mike Morath,Director of Safety,mike.morath@kellerisd.net,817-744-1015,linkedin.com/in/mike-morath,safety_director,91,hot,TRUE,2025-01-14
+Round Rock ISD,Round Rock,47000,sweet_spot,Dr. Hafedh Azaiez,Superintendent,hafedh_azaiez@roundrockisd.org,512-464-5000,linkedin.com/in/hafedh-azaiez,superintendent,85,hot,FALSE,2025-01-14
+Humble ISD,Humble,47500,sweet_spot,Dr. Elizabeth Fagen,Superintendent,elizabeth.fagen@humbleisd.net,281-641-1000,linkedin.com/in/elizabeth-fagen,superintendent,82,hot,FALSE,2025-01-14
+Prosper ISD,Prosper,32000,sweet_spot,Dr. Holly Ferguson,Superintendent,holly.ferguson@prosper-isd.net,469-219-2000,linkedin.com/in/holly-ferguson,superintendent,87,hot,TRUE,2025-01-14
+Prosper ISD,Prosper,32000,sweet_spot,Gary Gauthier,Director of Security,gary.gauthier@prosper-isd.net,469-219-2050,linkedin.com/in/gary-gauthier,safety_director,93,hot,TRUE,2025-01-14
+Georgetown ISD,Georgetown,14200,sweet_spot,Dr. Fred Brent,Superintendent,fred.brent@georgetownisd.org,512-943-5000,linkedin.com/in/fred-brent,superintendent,78,warm,FALSE,2025-01-14
+Pflugerville ISD,Pflugerville,26500,sweet_spot,Dr. Douglas Killian,Superintendent,douglas.killian@pfisd.net,512-594-0000,linkedin.com/in/douglas-killian,superintendent,80,warm,TRUE,2025-01-14
+Pflugerville ISD,Pflugerville,26500,sweet_spot,Robert Martinez,Safety Coordinator,robert.martinez@pfisd.net,512-594-0025,linkedin.com/in/robert-martinez,safety_director,88,hot,TRUE,2025-01-14
+New Braunfels ISD,New Braunfels,10800,sweet_spot,Dr. Randy Moczygemba,Superintendent,randy.moczygemba@nbisd.org,830-643-5700,linkedin.com/in/randy-moczygemba,superintendent,75,warm,FALSE,2025-01-14
+Comal ISD,New Braunfels,25500,sweet_spot,Dr. Andrew Kim,Superintendent,andrew.kim@comalisd.org,830-221-2000,linkedin.com/in/andrew-kim,superintendent,79,warm,TRUE,2025-01-14
+Comal ISD,New Braunfels,25500,sweet_spot,Jason Clark,Chief of Police,jason.clark@comalisd.org,830-221-2100,linkedin.com/in/jason-clark,safety_director,90,hot,TRUE,2025-01-14
+Hays CISD,Kyle,24000,sweet_spot,Dr. Eric Wright,Superintendent,eric.wright@hayscisd.net,512-268-2141,linkedin.com/in/eric-wright,superintendent,77,warm,FALSE,2025-01-14
+Dripping Springs ISD,Dripping Springs,8200,mid_size,Dr. Holly Morris-Kuentz,Superintendent,holly.morris@dsisdtx.us,512-858-3000,linkedin.com/in/holly-morris-kuentz,superintendent,68,warm,FALSE,2025-01-14
+Lake Travis ISD,Austin,12500,sweet_spot,Dr. Paul Norton,Superintendent,paul.norton@ltisdschools.org,512-533-6000,linkedin.com/in/paul-norton,superintendent,76,warm,TRUE,2025-01-14
+Lake Travis ISD,Austin,12500,sweet_spot,David Harrington,Director of Safety,david.harrington@ltisdschools.org,512-533-6050,linkedin.com/in/david-harrington,safety_director,85,hot,TRUE,2025-01-14
+Eanes ISD,Austin,8100,mid_size,Dr. Jeff Arnett,Superintendent,jeff.arnett@eanesisd.net,512-732-9000,linkedin.com/in/jeff-arnett,superintendent,65,warm,FALSE,2025-01-14
+Northwest ISD,Justin,28000,sweet_spot,Dr. Ryder Warren,Superintendent,ryder.warren@nisdtx.org,817-215-0000,linkedin.com/in/ryder-warren,superintendent,81,hot,TRUE,2025-01-14
+Northwest ISD,Justin,28000,sweet_spot,Mike Smith,Executive Director of Safety,mike.smith@nisdtx.org,817-215-0100,linkedin.com/in/mike-smith-safety,safety_director,89,hot,TRUE,2025-01-14
+Denton ISD,Denton,32000,sweet_spot,Dr. Jamie Wilson,Superintendent,jamie.wilson@dentonisd.org,940-369-0000,linkedin.com/in/jamie-wilson,superintendent,83,hot,TRUE,2025-01-14
+Denton ISD,Denton,32000,sweet_spot,Tony Garcia,Chief of Police,tony.garcia@dentonisd.org,940-369-0050,linkedin.com/in/tony-garcia-police,safety_director,91,hot,TRUE,2025-01-14
+McKinney ISD,McKinney,24500,sweet_spot,Dr. Rick McDaniel,Superintendent,rick.mcdaniel@mckinneyisd.net,469-302-4000,linkedin.com/in/rick-mcdaniel,superintendent,79,warm,FALSE,2025-01-14
+Allen ISD,Allen,21500,sweet_spot,Dr. Robin Bullock,Superintendent,robin.bullock@allenisd.org,972-727-0500,linkedin.com/in/robin-bullock,superintendent,78,warm,TRUE,2025-01-14
+Allen ISD,Allen,21500,sweet_spot,Steve Harbin,Director of Security,steve.harbin@allenisd.org,972-727-0550,linkedin.com/in/steve-harbin,safety_director,86,hot,TRUE,2025-01-14
+Frisco ISD,Frisco,67000,enterprise,Dr. Mike Waldrip,Superintendent,mike.waldrip@friscoisd.org,469-633-6000,linkedin.com/in/mike-waldrip,superintendent,72,warm,FALSE,2025-01-14
+Plano ISD,Plano,51000,enterprise,Dr. Theresa Williams,Superintendent,theresa.williams@pisd.edu,469-752-8100,linkedin.com/in/theresa-williams,superintendent,70,warm,TRUE,2025-01-14
+Plano ISD,Plano,51000,enterprise,Chris Moore,Executive Director of Safety,chris.moore@pisd.edu,469-752-8150,linkedin.com/in/chris-moore-safety,safety_director,82,hot,TRUE,2025-01-14
+Richardson ISD,Richardson,38000,sweet_spot,Dr. Tabitha Branum,Superintendent,tabitha.branum@risd.org,469-593-0000,linkedin.com/in/tabitha-branum,superintendent,80,warm,TRUE,2025-01-14
+Richardson ISD,Richardson,38000,sweet_spot,William Diehl,Director of Safety,william.diehl@risd.org,469-593-0100,linkedin.com/in/william-diehl,safety_director,87,hot,TRUE,2025-01-14
+Coppell ISD,Coppell,12800,sweet_spot,Dr. Brad Hunt,Superintendent,brad.hunt@coppellisd.com,214-496-6000,linkedin.com/in/brad-hunt,superintendent,76,warm,FALSE,2025-01-14
+Grapevine-Colleyville ISD,Grapevine,13800,sweet_spot,Dr. Robin Ryan,Superintendent,robin.ryan@gcisd.net,817-251-5200,linkedin.com/in/robin-ryan,superintendent,77,warm,TRUE,2025-01-14
+Grapevine-Colleyville ISD,Grapevine,13800,sweet_spot,Lisa Johnson,Safety Coordinator,lisa.johnson@gcisd.net,817-251-5250,linkedin.com/in/lisa-johnson-safety,safety_director,84,hot,TRUE,2025-01-14
+Carroll ISD,Southlake,8500,mid_size,Dr. Lane Ledbetter,Superintendent,lane.ledbetter@southlakecarroll.edu,817-949-8222,linkedin.com/in/lane-ledbetter,superintendent,68,warm,FALSE,2025-01-14
+Mansfield ISD,Mansfield,35000,sweet_spot,Dr. Kimberley Cantu,Superintendent,kimberley.cantu@misdmail.org,817-299-6300,linkedin.com/in/kimberley-cantu,superintendent,82,hot,TRUE,2025-01-14
+Mansfield ISD,Mansfield,35000,sweet_spot,Kevin Burdick,Chief of Police,kevin.burdick@misdmail.org,817-299-6350,linkedin.com/in/kevin-burdick,safety_director,90,hot,TRUE,2025-01-14
+Arlington ISD,Arlington,52000,enterprise,Dr. Marcelo Cavazos,Superintendent,marcelo.cavazos@aisd.net,682-867-4611,linkedin.com/in/marcelo-cavazos,superintendent,71,warm,TRUE,2025-01-14
+Arlington ISD,Arlington,52000,enterprise,Daniel Haydin,Executive Director of Safety,daniel.haydin@aisd.net,682-867-4700,linkedin.com/in/daniel-haydin,safety_director,83,hot,TRUE,2025-01-14
+Grand Prairie ISD,Grand Prairie,29500,sweet_spot,Dr. Linda Ellis,Superintendent,linda.ellis@gpisd.org,972-264-6141,linkedin.com/in/linda-ellis,superintendent,79,warm,FALSE,2025-01-14
+Irving ISD,Irving,33000,sweet_spot,Dr. Magda Hernandez,Superintendent,magda.hernandez@irvingisd.net,972-600-5000,linkedin.com/in/magda-hernandez,superintendent,80,warm,TRUE,2025-01-14
+Irving ISD,Irving,33000,sweet_spot,Frank Rodriguez,Director of Security,frank.rodriguez@irvingisd.net,972-600-5050,linkedin.com/in/frank-rodriguez,safety_director,88,hot,TRUE,2025-01-14
+Carrollton-Farmers Branch ISD,Carrollton,26000,sweet_spot,Dr. John Chapman,Superintendent,john.chapman@cfbisd.edu,972-968-6100,linkedin.com/in/john-chapman,superintendent,78,warm,FALSE,2025-01-14
+Garland ISD,Garland,57000,enterprise,Dr. Ricardo Lopez,Superintendent,ricardo.lopez@garlandisd.net,972-494-8201,linkedin.com/in/ricardo-lopez,superintendent,70,warm,TRUE,2025-01-14
+Garland ISD,Garland,57000,enterprise,Marcus Thompson,Chief of Police,marcus.thompson@garlandisd.net,972-494-8300,linkedin.com/in/marcus-thompson,safety_director,81,hot,TRUE,2025-01-14
+Mesquite ISD,Mesquite,38500,sweet_spot,Dr. Angel Rivera,Superintendent,angel.rivera@mesquiteisd.org,972-288-6411,linkedin.com/in/angel-rivera,superintendent,79,warm,FALSE,2025-01-14
+Rockwall ISD,Rockwall,17000,sweet_spot,Dr. Kelvin Kroemer,Superintendent,kelvin.kroemer@rockwallisd.org,972-771-0605,linkedin.com/in/kelvin-kroemer,superintendent,77,warm,TRUE,2025-01-14
+Rockwall ISD,Rockwall,17000,sweet_spot,Brad Henderson,Director of Safety,brad.henderson@rockwallisd.org,972-771-0650,linkedin.com/in/brad-henderson,safety_director,85,hot,TRUE,2025-01-14
+Wylie ISD,Wylie,18000,sweet_spot,Dr. David Vinson,Superintendent,david.vinson@wylieisd.net,972-429-3000,linkedin.com/in/david-vinson,superintendent,76,warm,FALSE,2025-01-14
+Lovejoy ISD,Lucas,5200,small,Dr. Michael Goddard,Superintendent,michael.goddard@lovejoyisd.net,469-742-8000,linkedin.com/in/michael-goddard,superintendent,62,cold,FALSE,2025-01-14
+Forney ISD,Forney,15500,sweet_spot,Dr. Justin Terry,Superintendent,justin.terry@forneyisd.net,972-564-4055,linkedin.com/in/justin-terry,superintendent,75,warm,FALSE,2025-01-14
+Midlothian ISD,Midlothian,14200,sweet_spot,Dr. Lane Ledbetter,Superintendent,lane.ledbetter@misd.gs,972-775-8296,linkedin.com/in/lane-ledbetter-misd,superintendent,74,warm,FALSE,2025-01-14
+Waxahachie ISD,Waxahachie,8500,mid_size,Dr. Bonny Cain,Superintendent,bonny.cain@wisd.org,972-923-4600,linkedin.com/in/bonny-cain,superintendent,67,warm,FALSE,2025-01-14
+Red Oak ISD,Red Oak,7800,mid_size,Dr. Brenda Sanford,Superintendent,brenda.sanford@redoakisd.org,972-617-2941,linkedin.com/in/brenda-sanford,superintendent,65,cold,FALSE,2025-01-14
+Cedar Hill ISD,Cedar Hill,8200,mid_size,Dr. Gerald Hudson,Superintendent,gerald.hudson@chisd.net,972-291-1581,linkedin.com/in/gerald-hudson,superintendent,66,warm,FALSE,2025-01-14
+DeSoto ISD,DeSoto,9500,mid_size,Dr. Usamah Rodgers,Superintendent,usamah.rodgers@desotoisd.org,972-223-6666,linkedin.com/in/usamah-rodgers,superintendent,68,warm,FALSE,2025-01-14
+Lancaster ISD,Lancaster,7200,mid_size,Dr. Elijah Granger,Superintendent,elijah.granger@lancasterisd.org,972-218-1400,linkedin.com/in/elijah-granger,superintendent,64,cold,FALSE,2025-01-14
+Duncanville ISD,Duncanville,12800,sweet_spot,Dr. Marc Smith,Superintendent,marc.smith@duncanvilleisd.org,972-708-2000,linkedin.com/in/marc-smith,superintendent,73,warm,TRUE,2025-01-14
+Duncanville ISD,Duncanville,12800,sweet_spot,Marcus Wells,Director of Safety,marcus.wells@duncanvilleisd.org,972-708-2100,linkedin.com/in/marcus-wells,safety_director,84,hot,TRUE,2025-01-14
+Crowley ISD,Crowley,15800,sweet_spot,Dr. Michael McFarland,Superintendent,michael.mcfarland@crowley.k12.tx.us,817-297-5800,linkedin.com/in/michael-mcfarland,superintendent,75,warm,FALSE,2025-01-14
+Burleson ISD,Burleson,14500,sweet_spot,Dr. Bret Jimerson,Superintendent,bret.jimerson@burleson.k12.tx.us,817-245-1000,linkedin.com/in/bret-jimerson,superintendent,74,warm,TRUE,2025-01-14
+Burleson ISD,Burleson,14500,sweet_spot,Troy Hamilton,Safety Coordinator,troy.hamilton@burleson.k12.tx.us,817-245-1050,linkedin.com/in/troy-hamilton,safety_director,83,hot,TRUE,2025-01-14
+Weatherford ISD,Weatherford,10200,sweet_spot,Dr. Beau Rees,Superintendent,beau.rees@weatherfordisd.com,817-598-2800,linkedin.com/in/beau-rees,superintendent,72,warm,FALSE,2025-01-14
+Granbury ISD,Granbury,8100,mid_size,Dr. Jeremy Glenn,Superintendent,jeremy.glenn@granburyisd.org,817-408-4000,linkedin.com/in/jeremy-glenn,superintendent,66,warm,FALSE,2025-01-14
+Cleburne ISD,Cleburne,7600,mid_size,Dr. Kyle Heath,Superintendent,kyle.heath@c-isd.com,817-202-1100,linkedin.com/in/kyle-heath,superintendent,65,cold,FALSE,2025-01-14
+Waco ISD,Waco,14500,sweet_spot,Dr. Susan Kincannon,Superintendent,susan.kincannon@wacoisd.org,254-755-9400,linkedin.com/in/susan-kincannon,superintendent,74,warm,TRUE,2025-01-14
+Waco ISD,Waco,14500,sweet_spot,David Williams,Chief of Police,david.williams@wacoisd.org,254-755-9450,linkedin.com/in/david-williams-waco,safety_director,85,hot,TRUE,2025-01-14
+Midway ISD,Waco,8800,mid_size,Dr. George Kazanas,Superintendent,george.kazanas@midwayisd.org,254-761-5610,linkedin.com/in/george-kazanas,superintendent,67,warm,FALSE,2025-01-14
+Killeen ISD,Killeen,44000,sweet_spot,Dr. John Craft,Superintendent,john.craft@killeenisd.org,254-336-0000,linkedin.com/in/john-craft,superintendent,81,hot,TRUE,2025-01-14
+Killeen ISD,Killeen,44000,sweet_spot,Patrick Sullivan,Director of Security,patrick.sullivan@killeenisd.org,254-336-0100,linkedin.com/in/patrick-sullivan,safety_director,89,hot,TRUE,2025-01-14
+Temple ISD,Temple,9500,mid_size,Dr. Bobby Ott,Superintendent,bobby.ott@tisd.org,254-215-6700,linkedin.com/in/bobby-ott,superintendent,68,warm,FALSE,2025-01-14
+Belton ISD,Belton,12000,sweet_spot,Dr. Matt Smith,Superintendent,matt.smith@bisd.net,254-215-2000,linkedin.com/in/matt-smith-belton,superintendent,73,warm,FALSE,2025-01-14
+Bryan ISD,Bryan,16800,sweet_spot,Dr. Ginger Carrabine,Superintendent,ginger.carrabine@bryanisd.org,979-209-1000,linkedin.com/in/ginger-carrabine,superintendent,76,warm,TRUE,2025-01-14
+Bryan ISD,Bryan,16800,sweet_spot,Eric Buske,Chief of Police,eric.buske@bryanisd.org,979-209-1100,linkedin.com/in/eric-buske,safety_director,86,hot,TRUE,2025-01-14
+College Station ISD,College Station,14200,sweet_spot,Dr. Mike Martindale,Superintendent,mike.martindale@csisd.org,979-764-5400,linkedin.com/in/mike-martindale,superintendent,75,warm,FALSE,2025-01-14
+Conroe ISD,Conroe,66000,enterprise,Dr. Curtis Null,Superintendent,curtis.null@conroeisd.net,936-709-7700,linkedin.com/in/curtis-null,superintendent,71,warm,TRUE,2025-01-14
+Conroe ISD,Conroe,66000,enterprise,Marcus Johnson,Executive Director of Safety,marcus.johnson@conroeisd.net,936-709-7800,linkedin.com/in/marcus-johnson-conroe,safety_director,82,hot,TRUE,2025-01-14
+Tomball ISD,Tomball,20500,sweet_spot,Dr. Martha Salazar-Zamora,Superintendent,martha.salazar@tomballisd.net,281-357-3100,linkedin.com/in/martha-salazar-zamora,superintendent,78,warm,FALSE,2025-01-14
+Magnolia ISD,Magnolia,15000,sweet_spot,Dr. Todd Stephens,Superintendent,todd.stephens@magnoliaisd.org,281-356-3571,linkedin.com/in/todd-stephens,superintendent,75,warm,TRUE,2025-01-14
+Magnolia ISD,Magnolia,15000,sweet_spot,Paul Kendall,Director of Safety,paul.kendall@magnoliaisd.org,281-356-3600,linkedin.com/in/paul-kendall,safety_director,84,hot,TRUE,2025-01-14
+Montgomery ISD,Montgomery,13500,sweet_spot,Dr. Heath Morrison,Superintendent,heath.morrison@misd.org,936-276-2000,linkedin.com/in/heath-morrison,superintendent,74,warm,FALSE,2025-01-14
+Willis ISD,Willis,9800,mid_size,Dr. Tim Harkrider,Superintendent,tim.harkrider@willisisd.org,936-856-1200,linkedin.com/in/tim-harkrider,superintendent,68,warm,FALSE,2025-01-14
+New Caney ISD,New Caney,18000,sweet_spot,Dr. Matt Calvert,Superintendent,matt.calvert@newcaneyisd.org,281-577-8600,linkedin.com/in/matt-calvert,superintendent,76,warm,TRUE,2025-01-14
+New Caney ISD,New Caney,18000,sweet_spot,Steve Moore,Safety Coordinator,steve.moore@newcaneyisd.org,281-577-8650,linkedin.com/in/steve-moore-safety,safety_director,85,hot,TRUE,2025-01-14
+Splendora ISD,Splendora,5800,small,Dr. Jeff Burke,Superintendent,jeff.burke@splendoraisd.org,281-689-3128,linkedin.com/in/jeff-burke,superintendent,60,cold,FALSE,2025-01-14
+Huffman ISD,Huffman,4200,small,Dr. Benny Soileau,Superintendent,benny.soileau@huffmanisd.net,281-324-1871,linkedin.com/in/benny-soileau,superintendent,58,cold,FALSE,2025-01-14
+Barbers Hill ISD,Mont Belvieu,8200,mid_size,Dr. Greg Poole,Superintendent,greg.poole@bhisd.net,281-576-2221,linkedin.com/in/greg-poole,superintendent,67,warm,FALSE,2025-01-14
+Crosby ISD,Crosby,6800,mid_size,Dr. Paula Patterson,Superintendent,paula.patterson@crosbyisd.org,281-328-9200,linkedin.com/in/paula-patterson,superintendent,64,cold,FALSE,2025-01-14
+Galena Park ISD,Houston,22000,sweet_spot,Dr. John Moore,Superintendent,john.moore@galenaparkisd.com,832-386-1000,linkedin.com/in/john-moore-gp,superintendent,77,warm,TRUE,2025-01-14
+Galena Park ISD,Houston,22000,sweet_spot,Raymond Garcia,Chief of Police,raymond.garcia@galenaparkisd.com,832-386-1100,linkedin.com/in/raymond-garcia,safety_director,86,hot,TRUE,2025-01-14
+Sheldon ISD,Houston,11500,sweet_spot,Dr. King Davis,Superintendent,king.davis@sheldonisd.com,281-727-2000,linkedin.com/in/king-davis,superintendent,73,warm,FALSE,2025-01-14
+Channelview ISD,Channelview,9800,mid_size,Dr. Tiffany Dunne-Oldfield,Superintendent,tiffany.dunne@cvisd.org,281-452-8000,linkedin.com/in/tiffany-dunne,superintendent,68,warm,FALSE,2025-01-14
+Goose Creek CISD,Baytown,24000,sweet_spot,Dr. Randal O'Brien,Superintendent,randal.obrien@gccisd.net,281-420-4800,linkedin.com/in/randal-obrien,superintendent,78,warm,TRUE,2025-01-14
+Goose Creek CISD,Baytown,24000,sweet_spot,James Williams,Director of Safety,james.williams@gccisd.net,281-420-4850,linkedin.com/in/james-williams-gc,safety_director,87,hot,TRUE,2025-01-14
+La Porte ISD,La Porte,8500,mid_size,Dr. Walter Jackson,Superintendent,walter.jackson@lpisd.org,281-604-7000,linkedin.com/in/walter-jackson,superintendent,66,warm,FALSE,2025-01-14
+Deer Park ISD,Deer Park,12500,sweet_spot,Dr. Stephen Harrell,Superintendent,stephen.harrell@dpisd.org,832-668-7000,linkedin.com/in/stephen-harrell,superintendent,74,warm,FALSE,2025-01-14
+Pasadena ISD,Pasadena,52000,enterprise,Dr. DeeAnn Powell,Superintendent,deeann.powell@pasadenaisd.org,713-740-0000,linkedin.com/in/deeann-powell,superintendent,70,warm,TRUE,2025-01-14
+Pasadena ISD,Pasadena,52000,enterprise,Ruben Garica,Chief of Police,ruben.garcia@pasadenaisd.org,713-740-0100,linkedin.com/in/ruben-garcia,safety_director,81,hot,TRUE,2025-01-14
+Clear Creek ISD,League City,42500,sweet_spot,Dr. Eric Williams,Superintendent,eric.williams@ccisd.net,281-284-0000,linkedin.com/in/eric-williams-cc,superintendent,82,hot,TRUE,2025-01-14
+Clear Creek ISD,League City,42500,sweet_spot,Aaron Bowman,Executive Director of Safety,aaron.bowman@ccisd.net,281-284-0100,linkedin.com/in/aaron-bowman,safety_director,90,hot,TRUE,2025-01-14
+Dickinson ISD,Dickinson,12000,sweet_spot,Dr. Carla Voelkel,Superintendent,carla.voelkel@dickinsonisd.org,281-229-6000,linkedin.com/in/carla-voelkel,superintendent,74,warm,FALSE,2025-01-14
+Santa Fe ISD,Santa Fe,4800,small,Dr. Joe Kelley,Superintendent,joe.kelley@sfisd.org,409-925-3526,linkedin.com/in/joe-kelley,superintendent,70,warm,TRUE,2025-01-14
+Santa Fe ISD,Santa Fe,4800,small,John Barnes,Safety Director,john.barnes@sfisd.org,409-925-3550,linkedin.com/in/john-barnes,safety_director,92,hot,TRUE,2025-01-14
+Friendswood ISD,Friendswood,6200,mid_size,Dr. Thad Roher,Superintendent,thad.roher@fisdk12.net,281-482-1267,linkedin.com/in/thad-roher,superintendent,65,warm,FALSE,2025-01-14
+Pearland ISD,Pearland,21000,sweet_spot,Dr. Larry Berger,Superintendent,larry.berger@pearlandisd.org,281-485-3203,linkedin.com/in/larry-berger,superintendent,78,warm,TRUE,2025-01-14
+Pearland ISD,Pearland,21000,sweet_spot,Phillip Ricks,Director of Safety,phillip.ricks@pearlandisd.org,281-485-3250,linkedin.com/in/phillip-ricks,safety_director,87,hot,TRUE,2025-01-14
+Alvin ISD,Alvin,27000,sweet_spot,Dr. Carol Nelson,Superintendent,carol.nelson@alvinisd.net,281-388-1130,linkedin.com/in/carol-nelson,superintendent,79,warm,FALSE,2025-01-14
+Angleton ISD,Angleton,7200,mid_size,Dr. Phil Edwards,Superintendent,phil.edwards@angletonisd.net,979-864-8000,linkedin.com/in/phil-edwards,superintendent,64,cold,FALSE,2025-01-14
+Brazosport ISD,Clute,13000,sweet_spot,Dr. Danny Massey,Superintendent,danny.massey@brazosportisd.net,979-730-7000,linkedin.com/in/danny-massey,superintendent,73,warm,TRUE,2025-01-14
+Brazosport ISD,Clute,13000,sweet_spot,Keith Moore,Safety Coordinator,keith.moore@brazosportisd.net,979-730-7050,linkedin.com/in/keith-moore,safety_director,84,hot,TRUE,2025-01-14
+Columbia-Brazoria ISD,West Columbia,3800,small,Dr. Michelle Cavazos,Superintendent,michelle.cavazos@cbisd.com,979-345-5147,linkedin.com/in/michelle-cavazos,superintendent,58,cold,FALSE,2025-01-14
+Fort Bend ISD,Sugar Land,78000,enterprise,Dr. Christie Whitbeck,Superintendent,christie.whitbeck@fortbendisd.com,281-634-1000,linkedin.com/in/christie-whitbeck,superintendent,68,warm,TRUE,2025-01-14
+Fort Bend ISD,Sugar Land,78000,enterprise,Sam Tomlinson,Chief of Police,sam.tomlinson@fortbendisd.com,281-634-1100,linkedin.com/in/sam-tomlinson,safety_director,80,warm,TRUE,2025-01-14
+Lamar CISD,Rosenberg,38000,sweet_spot,Dr. Roosevelt Nivens,Superintendent,roosevelt.nivens@lcisd.org,832-223-0000,linkedin.com/in/roosevelt-nivens,superintendent,80,warm,TRUE,2025-01-14
+Lamar CISD,Rosenberg,38000,sweet_spot,Dennis Waller,Director of Safety,dennis.waller@lcisd.org,832-223-0100,linkedin.com/in/dennis-waller,safety_director,88,hot,TRUE,2025-01-14
+Katy ISD,Katy,92000,enterprise,Dr. Ken Gregorski,Superintendent,ken.gregorski@katyisd.org,281-396-6000,linkedin.com/in/ken-gregorski,superintendent,67,warm,TRUE,2025-01-14
+Katy ISD,Katy,92000,enterprise,Brad Havard,Chief of Police,brad.havard@katyisd.org,281-396-6100,linkedin.com/in/brad-havard,safety_director,79,warm,TRUE,2025-01-14
+Cy-Fair ISD,Houston,118000,enterprise,Dr. Mark Henry,Superintendent,mark.henry@cfisd.net,281-897-4000,linkedin.com/in/mark-henry,superintendent,65,cold,TRUE,2025-01-14
+Cy-Fair ISD,Houston,118000,enterprise,Jeff Wagner,Executive Director of Safety,jeff.wagner@cfisd.net,281-897-4100,linkedin.com/in/jeff-wagner,safety_director,78,warm,TRUE,2025-01-14
+Spring ISD,Houston,33000,sweet_spot,Dr. Lupita Hinojosa,Superintendent,lupita.hinojosa@springisd.org,281-891-6000,linkedin.com/in/lupita-hinojosa,superintendent,80,warm,TRUE,2025-01-14
+Spring ISD,Houston,33000,sweet_spot,Ken Culbreath,Chief of Police,ken.culbreath@springisd.org,281-891-6100,linkedin.com/in/ken-culbreath,safety_director,88,hot,TRUE,2025-01-14
+Klein ISD,Houston,54000,enterprise,Dr. Jenny McGown,Superintendent,jenny.mcgown@kleinisd.net,832-249-4000,linkedin.com/in/jenny-mcgown,superintendent,69,warm,TRUE,2025-01-14
+Klein ISD,Houston,54000,enterprise,Michael Henry,Chief of Police,michael.henry@kleinisd.net,832-249-4100,linkedin.com/in/michael-henry-klein,safety_director,81,hot,TRUE,2025-01-14
+Aldine ISD,Houston,67000,enterprise,Dr. LaTonya Goffney,Superintendent,latonya.goffney@aldineisd.org,281-985-6300,linkedin.com/in/latonya-goffney,superintendent,68,warm,TRUE,2025-01-14
+Aldine ISD,Houston,67000,enterprise,Jonathan Parker,Director of Safety,jonathan.parker@aldineisd.org,281-985-6400,linkedin.com/in/jonathan-parker,safety_director,80,warm,TRUE,2025-01-14
+North East ISD,San Antonio,64000,enterprise,Dr. Sean Maika,Superintendent,sean.maika@neisd.net,210-407-0000,linkedin.com/in/sean-maika,superintendent,69,warm,TRUE,2025-01-14
+North East ISD,San Antonio,64000,enterprise,Jack Walker,Chief of Police,jack.walker@neisd.net,210-407-0100,linkedin.com/in/jack-walker,safety_director,81,hot,TRUE,2025-01-14
+Northside ISD,San Antonio,107000,enterprise,Dr. Brian Woods,Superintendent,brian.woods@nisd.net,210-397-8500,linkedin.com/in/brian-woods,superintendent,66,cold,TRUE,2025-01-14
+Northside ISD,San Antonio,107000,enterprise,Raul Banasco,Executive Director of Safety,raul.banasco@nisd.net,210-397-8600,linkedin.com/in/raul-banasco,safety_director,78,warm,TRUE,2025-01-14
+Judson ISD,San Antonio,23500,sweet_spot,Dr. Jeanette Ball,Superintendent,jeanette.ball@judsonisd.org,210-945-5100,linkedin.com/in/jeanette-ball,superintendent,77,warm,TRUE,2025-01-14
+Judson ISD,San Antonio,23500,sweet_spot,Gerald Doty,Director of Safety,gerald.doty@judsonisd.org,210-945-5150,linkedin.com/in/gerald-doty,safety_director,86,hot,TRUE,2025-01-14
+Schertz-Cibolo-Universal City ISD,Schertz,17800,sweet_spot,Dr. Clark Ealy,Superintendent,clark.ealy@scuc.txed.net,210-945-6200,linkedin.com/in/clark-ealy,superintendent,76,warm,FALSE,2025-01-14
+Boerne ISD,Boerne,10500,sweet_spot,Dr. Thomas Price,Superintendent,thomas.price@boerneisd.net,830-357-2000,linkedin.com/in/thomas-price,superintendent,73,warm,TRUE,2025-01-14
+Boerne ISD,Boerne,10500,sweet_spot,Chad Martinez,Safety Coordinator,chad.martinez@boerneisd.net,830-357-2050,linkedin.com/in/chad-martinez,safety_director,84,hot,TRUE,2025-01-14

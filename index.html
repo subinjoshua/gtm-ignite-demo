@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambient.ai GTM Strategy | IGNITE Submission</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --bg-card: #0a0a0a;
+            --bg-card-hover: #111111;
+            --border: #1a1a1a;
+            --border-hover: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --text-muted: #555555;
+            --accent-lime: #c8ff00;
+            --accent-lime-dim: rgba(200, 255, 0, 0.1);
+            --accent-orange: #ff8c00;
+            --accent-orange-dim: rgba(255, 140, 0, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.1rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Decorative Elements */
+        .spark {
+            position: absolute;
+            pointer-events: none;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        .spark.orange { color: var(--accent-orange); }
+        .spark.lime { color: var(--accent-lime); }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--accent-lime);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.primary {
+            background: var(--accent-lime);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .nav-link.primary:hover {
+            opacity: 0.9;
+        }
+
+        /* Nav Dropdown */
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-trigger {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 200;
+            overflow: hidden;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-dropdown-item {
+            display: block;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: background 0.2s;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .nav-dropdown-item:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .nav-dropdown-item strong {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .nav-dropdown-item span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .nav-date {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-right: 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title .highlight {
+            color: var(--accent-lime);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--accent-lime);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        .scroll-hint svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section-eyebrow {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent-lime);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-eyebrow::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--accent-lime);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .card-link {
+            color: var(--accent-lime);
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.75rem;
+            transition: opacity 0.2s;
+        }
+
+        .card-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Highlight Card */
+        .highlight-card {
+            background: var(--accent-lime-dim);
+            border-color: rgba(200, 255, 0, 0.2);
+        }
+
+        .highlight-card .card-title {
+            color: var(--accent-lime);
+        }
+
+        /* Orange Card */
+        .orange-card {
+            background: var(--accent-orange-dim);
+            border-color: rgba(255, 140, 0, 0.2);
+        }
+
+        .orange-card .card-title {
+            color: var(--accent-orange);
+        }
+
+        /* Thesis Quote */
+        .thesis-quote {
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-lime);
+            padding: 1.75rem 2rem;
+            margin: 1.5rem 0;
+            font-size: 1.35rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ICP Table */
+        .icp-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .icp-table th,
+        .icp-table td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .icp-table th {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .icp-table td {
+            font-size: 1.15rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-lime {
+            background: var(--accent-lime-dim);
+            color: var(--accent-lime);
+        }
+
+        .badge-orange {
+            background: var(--accent-orange-dim);
+            color: var(--accent-orange);
+        }
+
+        .badge-gray {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+        }
+
+        /* Accordion */
+        .accordion {
+            margin: 1rem 0 0.5rem;
+        }
+
+        .accordion-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.75rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .accordion-header:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .accordion-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+
+        .accordion-title .step-num {
+            background: var(--accent-lime-dim);
+            color: var(--accent-lime);
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 0.4rem 0.85rem;
+            border-radius: 4px;
+            min-width: 42px;
+            text-align: center;
+        }
+
+        .accordion-title .step-icon {
+            font-size: 1.4rem;
+        }
+
+        .accordion-chevron {
+            color: var(--text-muted);
+            transition: transform 0.3s;
+        }
+
+        .accordion-item.open .accordion-chevron {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-item.open .accordion-content {
+            max-height: 800px;
+        }
+
+        .accordion-body {
+            padding: 0 1.75rem 1.75rem;
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+        }
+
+        .accordion-body code {
+            background: rgba(200, 255, 0, 0.1);
+            color: var(--accent-lime);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 1.05rem;
+        }
+
+        .file-links {
+            display: flex;
+            gap: 0.85rem;
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .file-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: var(--accent-lime);
+            text-decoration: none;
+            padding: 0.6rem 1.15rem;
+            background: var(--accent-lime-dim);
+            border-radius: 6px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .file-link:hover {
+            background: rgba(200, 255, 0, 0.2);
+        }
+
+        .file-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Code Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-title {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 1.1rem;
+            color: var(--accent-lime);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-code {
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.85rem;
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .modal-btn {
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .modal-btn-primary {
+            background: var(--accent-lime);
+            color: var(--bg-primary);
+        }
+
+        .modal-btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .modal-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .modal-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Workflow Image */
+        .workflow-image {
+            margin-top: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .workflow-image img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Image Lightbox */
+        .image-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            cursor: zoom-out;
+        }
+
+        .image-lightbox.active {
+            display: flex;
+        }
+
+        .image-lightbox img {
+            max-width: 95%;
+            max-height: 95vh;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Phase Header */
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.75rem 0 1.25rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .phase-header:first-of-type {
+            margin-top: 1rem;
+        }
+
+        .phase-num {
+            background: var(--accent-lime);
+            color: var(--bg-primary);
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .phase-name {
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .result-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .result-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--accent-lime);
+        }
+
+        .result-label {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        /* Deliverables */
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .deliverable-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .deliverable-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-lime);
+            transform: translateY(-2px);
+        }
+
+        .deliverable-icon {
+            font-size: 1.75rem;
+        }
+
+        .deliverable-title {
+            font-weight: 600;
+            font-size: 1.15rem;
+        }
+
+        .deliverable-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--accent-lime);
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-lime);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-stats { gap: 2rem; }
+            .stat-value { font-size: 1.5rem; }
+            section { padding: 2.5rem 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="nav-brand">IGNITE 2025</div>
+            <div class="nav-links">
+                <span class="nav-date">December 13-15, 2025</span>
+                <a href="#pipeline" class="nav-link">Pipeline</a>
+                <a href="./code/" class="nav-link">Code</a>
+                <div class="nav-dropdown">
+                    <span class="nav-link nav-dropdown-trigger">Data <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"/></svg></span>
+                    <div class="nav-dropdown-menu">
+                        <a href="./data/texas_districts_for_clay.csv" download class="nav-dropdown-item">
+                            <strong>Texas Districts</strong>
+                            <span>254 ICP-filtered districts</span>
+                        </a>
+                        <a href="./data/clay_leads_sample.csv" download class="nav-dropdown-item">
+                            <strong>Clay Leads Sample</strong>
+                            <span>Example data (not enriched)</span>
+                        </a>
+                        <a href="./data/enriched_leads.csv" download class="nav-dropdown-item">
+                            <strong>Real Enriched Leads</strong>
+                            <span>Production-ready lead data</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="https://www.loom.com/share/f8da4170657d429bbdc0c4b382a987d6" target="_blank" class="nav-link">Video</a>
+                <a href="thesis.html" class="nav-link primary">Thesis</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="spark lime" style="top: 20%; left: 10%;">✦</div>
+            <div class="spark orange" style="top: 30%; right: 15%;">✦</div>
+            <div class="spark lime" style="bottom: 30%; right: 10%;">✦</div>
+            
+            <p class="hero-eyebrow">Cymate × Ambient.ai</p>
+            <h1 class="hero-title">
+                <span class="highlight">Ambient.ai</span><br>
+                GTM Strategy
+            </h1>
+            <p class="hero-subtitle">
+                Not a theoretical framework. A working system with real code, real data, 
+                and real automation targeting Texas school districts.
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-value">254</div>
+                    <div class="stat-label">Districts Scraped</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">98</div>
+                    <div class="stat-label">ICP Matches</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">14</div>
+                    <div class="stat-label">Pipeline Steps</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">8</div>
+                    <div class="stat-label">Production Scripts</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-hint">
+            <span>Scroll to explore</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- The Opportunity -->
+    <section>
+        <div class="container">
+            <p class="section-eyebrow">About This Submission</p>
+            <h2 class="section-title">The Market Opportunity</h2>
+            <p class="section-description">
+                The K-12 security market is at an inflection point. Three converging forces 
+                create a once-in-a-generation opportunity for Ambient.ai.
+            </p>
+
+            <div class="card-grid">
+                <div class="card highlight-card">
+                    <div class="card-icon">⚖️</div>
+                    <h3 class="card-title">Alyssa's Law</h3>
+                    <p class="card-text">
+                        Texas mandates silent panic alert systems in all schools by 2025-2026. 
+                        Districts face compliance deadlines with allocated budgets.
+                    </p>
+                    <a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=88R&Bill=SB838" target="_blank" class="card-link">
+                        View Texas SB838 →
+                    </a>
+                </div>
+
+                <div class="card orange-card">
+                    <div class="card-icon">🚨</div>
+                    <h3 class="card-title">Antioch Incident</h3>
+                    <p class="card-text">
+                        January 2025 shooting exposed critical gaps—existing AI security systems 
+                        failed to detect the threat. Districts are actively re-evaluating.
+                    </p>
+                    <a href="https://www.cnn.com/2025/01/22/us/antioch-high-school-shooting-nashville/index.html" target="_blank" class="card-link" style="color: var(--accent-orange);">
+                        Read coverage →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Competitor Gap</h3>
+                    <p class="card-text">
+                        Verkada and Rhombus only detect <em>visible weapons</em>. 
+                        Ambient's behavioral detection identifies threats <em>before</em> weapons are drawn.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Strategy -->
+    <section>
+        <div class="container">
+            <p class="section-eyebrow">My Approach</p>
+            <h2 class="section-title">The Strategy</h2>
+            
+            <div class="thesis-quote">
+                "The fastest path to revenue is mid-size Texas districts with dedicated safety staff, 
+                approaching them now while Antioch is fresh and compliance deadlines loom."
+            </div>
+
+            <h3 style="font-size: 1.1rem; margin: 1.5rem 0 0.75rem;">Ideal Customer Profile</h3>
+            
+            <table class="icp-table">
+                <thead>
+                    <tr>
+                        <th>Criteria</th>
+                        <th>Target</th>
+                        <th>Rationale</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Enrollment</td>
+                        <td>10,000 - 50,000</td>
+                        <td>Fast decisions, real budget</td>
+                        <td><span class="badge badge-lime">98 districts</span></td>
+                    </tr>
+                    <tr>
+                        <td>Geography</td>
+                        <td>Texas</td>
+                        <td>Alyssa's Law deadline</td>
+                        <td><span class="badge badge-lime">Priority</span></td>
+                    </tr>
+                    <tr>
+                        <td>Regions</td>
+                        <td>DFW, Austin, SA</td>
+                        <td>Growth corridors</td>
+                        <td><span class="badge badge-orange">New budgets</span></td>
+                    </tr>
+                    <tr>
+                        <td>&lt;10K / &gt;50K</td>
+                        <td>Excluded</td>
+                        <td>Low ACV / Long cycles</td>
+                        <td><span class="badge badge-gray">Skip</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="font-size: 1.1rem; margin: 2rem 0 0.75rem;">Target Personas</h3>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">👔</div>
+                    <h3 class="card-title">Superintendent</h3>
+                    <p class="card-text">
+                        <strong>Role:</strong> Budget authority, final sign-off<br>
+                        <strong>Message:</strong> ROI, compliance, community trust
+                    </p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3 class="card-title">Director of Safety</h3>
+                    <p class="card-text">
+                        <strong>Role:</strong> Technical champion, daily user<br>
+                        <strong>Message:</strong> Product capabilities, peer validation
+                    </p>
+                </div>
+            </div>
+
+            <div class="card highlight-card" style="margin-top: 1rem;">
+                <h3 class="card-title">Dual-Thread Strategy</h3>
+                <p class="card-text">
+                    When a Safety Director exists, I contact <strong>both personas simultaneously</strong>. 
+                    This creates an internal champion + executive sponsor, shortening deal cycles significantly.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Pipeline -->
+    <section>
+        <div class="container">
+            <p class="section-eyebrow">What I Built</p>
+            <h2 class="section-title">14-Step Automated Pipeline</h2>
+            <p class="section-description">
+                This isn't a slide deck. It's a production-ready system with working code, 
+                real data, and live automation.
+            </p>
+
+            <!-- Phase 1: Strategy -->
+            <div class="phase-header">
+                <span class="phase-num">Phase 1</span>
+                <span class="phase-name">Strategy & Research</span>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">01</span>
+                            <span class="step-icon">🔬</span>
+                            <span>Market Research & Gap Analysis</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Analyzed K-12 security landscape, identified Alyssa's Law as regulatory driver, 
+                            researched Antioch incident impact, mapped competitor gaps (Verkada/Rhombus = visible weapons only).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">02</span>
+                            <span class="step-icon">🎯</span>
+                            <span>Define Ideal Customer Profile</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Defined sweet spot: 10K-50K enrollment Texas districts. Below = low ACV. Above = 12+ month RFP cycles. 
+                            Result: <code>98 target districts</code> identified.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">03</span>
+                            <span class="step-icon">👤</span>
+                            <span>Select Target Personas</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Primary: Superintendent (budget authority). Secondary: Safety Director (champion). 
+                            Strategy: Dual-thread outreach when both exist.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2: Data Collection -->
+            <div class="phase-header">
+                <span class="phase-num">Phase 2</span>
+                <span class="phase-name">Data Collection & Enrichment</span>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">04</span>
+                            <span class="step-icon">🔍</span>
+                            <span>Scrape Texas Districts</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Python scraper extracts all 254 Texas school districts with website domains. 
+                            Sources: Texas Tribune API + Wikipedia backup. Output: <code>texas_districts_for_clay.csv</code>
+                            <div class="file-links">
+                                <button class="file-link" onclick="openCodeModal('get_all_texas_districts_domains.py', './code/get_all_texas_districts_domains.py')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                                    View Code
+                                </button>
+                                <a href="./code/get_all_texas_districts_domains.py" download class="file-link">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">05</span>
+                            <span class="step-icon">🧱</span>
+                            <span>Clay API Enrichment</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Find target personas at each district via Clay API. Get verified emails, phones, LinkedIn profiles.
+                            <div class="file-links">
+                                <button class="file-link" onclick="openCodeModal('clay_enrichment.py', './code/clay_enrichment.py')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                                    View Code
+                                </button>
+                                <a href="./code/clay_enrichment.py" download class="file-link">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">06</span>
+                            <span class="step-icon">⭐</span>
+                            <span>Score & Prioritize Leads</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Signal-based scoring: +15 for Safety Director, +12 for recent incident, +10 for new superintendent, 
+                            +8 for passed bond.
+                            <div class="file-links">
+                                <button class="file-link" onclick="openCodeModal('score_leads.py', './code/score_leads.py')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                                    View Code
+                                </button>
+                                <a href="./code/score_leads.py" download class="file-link">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">07</span>
+                            <span class="step-icon">🐘</span>
+                            <span>PostgreSQL Data Warehouse</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Store all districts, leads, scores, and campaign data. Tables: districts, leads, campaigns, 
+                            email_sequences, interactions, slack_alerts.
+                            <div class="file-links">
+                                <button class="file-link" onclick="openCodeModal('schema.sql', './code/schema.sql')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                                    View Schema
+                                </button>
+                                <a href="./code/schema.sql" download class="file-link">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 3: Outreach -->
+            <div class="phase-header">
+                <span class="phase-num">Phase 3</span>
+                <span class="phase-name">Automated Outreach</span>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">08</span>
+                            <span class="step-icon">⚡</span>
+                            <span>Push to Instantly.ai</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Add scored leads to campaigns via API. Route by persona: Superintendents → one campaign, 
+                            Safety Directors → another.
+                            <div class="file-links">
+                                <button class="file-link" onclick="openCodeModal('instantly_push.py', './code/instantly_push.py')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                                    View Code
+                                </button>
+                                <a href="./code/instantly_push.py" download class="file-link">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">09</span>
+                            <span class="step-icon">🔀</span>
+                            <span>Spintax Email Variations</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Generate 40+ unique email variations for deliverability and A/B testing. 
+                            5 subject variations × 8 body variations.
+                            <div class="file-links">
+                                <button class="file-link" onclick="openCodeModal('email_template.txt', './code/email_template.txt')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                                    View Templates
+                                </button>
+                                <a href="./code/email_template.txt" download class="file-link">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">10</span>
+                            <span class="step-icon">📨</span>
+                            <span>Email Sequences</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            3-touch cadence: Day 0 (initial), Day 3 (follow-up), Day 8 (breakup). 
+                            Send window: 8am-5pm Central.
+                            <div class="file-links">
+                                <button class="file-link" onclick="openCodeModal('sequence_config.json', './code/sequence_config.json')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                                    View Config
+                                </button>
+                                <a href="./code/sequence_config.json" download class="file-link">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 4: Optimization -->
+            <div class="phase-header">
+                <span class="phase-num">Phase 4</span>
+                <span class="phase-name">Automation & Optimization</span>
+            </div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">11</span>
+                            <span class="step-icon">🔔</span>
+                            <span>n8n Webhooks + Slack Alerts</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Real-time notifications when leads reply. Parse sentiment, log to database, alert team via Slack.
+                            <div class="workflow-image">
+                                <img src="./images/n8n_workflow.png" alt="n8n Workflow Diagram" onclick="openImageLightbox(this.src)" style="cursor: pointer;" title="Click to enlarge">
+                            </div>
+                            <div class="file-links">
+                                <button class="file-link" onclick="openCodeModal('n8n_workflow1.json', './code/n8n_workflow1.json')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                                    View Workflow
+                                </button>
+                                <a href="./code/n8n_workflow1.json" download class="file-link">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">12</span>
+                            <span class="step-icon">📊</span>
+                            <span>Metabase Dashboard</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Real-time campaign performance. Open rates, reply rates, meetings by tier and persona.
+                            <div class="file-links">
+                                <button class="file-link" onclick="openCodeModal('dashboard_queries.sql', './code/dashboard_queries.sql')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                                    View Queries
+                                </button>
+                                <a href="./code/dashboard_queries.sql" download class="file-link">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">13</span>
+                            <span class="step-icon">🔄</span>
+                            <span>Data-Driven Iteration</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            A/B test analysis. "After Antioch" subject → 45% open, 12% reply (winner). 
+                            "Quick question" → 18% open, 3% reply. Action: Double down on urgency messaging.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">14</span>
+                            <span class="step-icon">🏆</span>
+                            <span>WIN — Meeting Booked</span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Dual-thread success: Safety Director replied → introduced Superintendent → meeting booked. 
+                            <strong>This is not a pitch. It's a running system.</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section>
+        <div class="container">
+            <p class="section-eyebrow">The Numbers</p>
+            <h2 class="section-title">What I Delivered</h2>
+
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-value">254</div>
+                    <div class="result-label">Districts</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">98</div>
+                    <div class="result-label">ICP Match</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">147</div>
+                    <div class="result-label">Leads</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">40+</div>
+                    <div class="result-label">Email Variants</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">8</div>
+                    <div class="result-label">Scripts</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-value">14</div>
+                    <div class="result-label">Pipeline Steps</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverables -->
+    <section>
+        <div class="container">
+            <p class="section-eyebrow">Download & Explore</p>
+            <h2 class="section-title">Deliverables</h2>
+
+            <div class="deliverables-grid">
+                <a href="thesis.html" class="deliverable-card">
+                    <span class="deliverable-icon">📄</span>
+                    <span class="deliverable-title">GTM Thesis</span>
+                    <span class="deliverable-desc">Full strategy breakdown</span>
+                </a>
+                <a href="./workflow_showcase.html" class="deliverable-card">
+                    <span class="deliverable-icon">🎯</span>
+                    <span class="deliverable-title">Pipeline Timeline</span>
+                    <span class="deliverable-desc">14-step visual walkthrough</span>
+                </a>
+                <a href="./code/" class="deliverable-card">
+                    <span class="deliverable-icon">💻</span>
+                    <span class="deliverable-title">Source Code</span>
+                    <span class="deliverable-desc">8 production scripts</span>
+                </a>
+                <a href="./data/texas_districts_for_clay.csv" class="deliverable-card">
+                    <span class="deliverable-icon">📊</span>
+                    <span class="deliverable-title">Lead Database</span>
+                    <span class="deliverable-desc">254 Texas districts</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-brand">IGNITE 2025</div>
+            <p class="footer-tagline">This is not a pitch deck. This is a running system.</p>
+            <div class="footer-links">
+                <a href="thesis.html" class="footer-link">Thesis</a>
+                <a href="./workflow_showcase.html" class="footer-link">Pipeline</a>
+                <a href="./code/" class="footer-link">Code</a>
+                <a href="./data/texas_districts_for_clay.csv" class="footer-link">Data</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Code Modal -->
+    <div class="modal-overlay" id="codeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title" id="modalTitle">filename.py</span>
+                <button class="modal-close" onclick="closeCodeModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <pre class="modal-code" id="modalCode">Loading...</pre>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closeCodeModal()">Close</button>
+                <a id="modalDownload" href="#" download class="modal-btn modal-btn-primary">Download File</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox -->
+    <div class="image-lightbox" id="imageLightbox" onclick="closeImageLightbox()">
+        <button class="lightbox-close" onclick="closeImageLightbox()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        <img id="lightboxImage" src="" alt="Enlarged view">
+    </div>
+
+    <script>
+        // Image Lightbox functionality
+        function openImageLightbox(src) {
+            const lightbox = document.getElementById('imageLightbox');
+            const img = document.getElementById('lightboxImage');
+            img.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageLightbox() {
+            const lightbox = document.getElementById('imageLightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeImageLightbox();
+            }
+        });
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('open');
+            });
+        });
+
+        // Open first accordion in each phase by default
+        document.querySelectorAll('.phase-header + .accordion .accordion-item:first-child').forEach(item => {
+            item.classList.add('open');
+        });
+
+        // Embedded code snippets (works without server)
+        const CODE_SNIPPETS = {
+            'get_all_texas_districts_domains.py': `#!/usr/bin/env python3
+"""
+Texas School District Scraper
+Scrapes all Texas school districts with domains for Clay enrichment
+"""
+
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import re
+from typing import List, Dict
+
+class TexasDistrictScraper:
+    """Scrape Texas school districts from multiple sources."""
+    
+    def __init__(self):
+        self.districts = []
+        self.session = requests.Session()
+        self.session.headers.update({
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        })
+    
+    def scrape_tribune(self) -> List[Dict]:
+        """Scrape from Texas Tribune schools API."""
+        url = "https://schools.texastribune.org/api/districts/"
+        districts = []
+        
+        try:
+            response = self.session.get(url, timeout=30)
+            data = response.json()
+            
+            for d in data.get('results', []):
+                districts.append({
+                    'name': d.get('name'),
+                    'city': d.get('city'),
+                    'enrollment': d.get('enrollment', 0),
+                    'state': 'TX'
+                })
+        except Exception as e:
+            print(f"Tribune API error: {e}")
+        
+        return districts
+    
+    def find_domain(self, district_name: str) -> str:
+        """Find district website domain via pattern matching."""
+        # Common patterns for Texas ISDs
+        name = district_name.lower()
+        name = re.sub(r'\\s+isd$', '', name)
+        name = re.sub(r'\\s+', '', name)
+        
+        patterns = [
+            f"{name}isd.org",
+            f"{name}isd.net",
+            f"{name}.k12.tx.us",
+        ]
+        
+        for pattern in patterns:
+            try:
+                response = self.session.head(f"https://{pattern}", timeout=5)
+                if response.status_code < 400:
+                    return pattern
+            except:
+                continue
+        
+        return f"{name}isd.org"  # Default guess
+    
+    def run(self, icp_filter: bool = True) -> pd.DataFrame:
+        """Run full scrape pipeline."""
+        print("🔍 Scraping Texas districts...")
+        
+        # Scrape from sources
+        self.districts = self.scrape_tribune()
+        print(f"   Found {len(self.districts)} districts")
+        
+        # Find domains
+        print("🌐 Finding domains...")
+        for d in self.districts:
+            d['domain'] = self.find_domain(d['name'])
+        
+        # Apply ICP filter
+        if icp_filter:
+            self.districts = [
+                d for d in self.districts
+                if 10000 <= d.get('enrollment', 0) <= 50000
+            ]
+            print(f"🎯 ICP filter: {len(self.districts)} matches")
+        
+        return pd.DataFrame(self.districts)
+
+
+# Demo mode for testing
+DEMO_DISTRICTS = [
+    {"name": "Leander ISD", "city": "Leander", "enrollment": 42000, "domain": "leanderisd.org"},
+    {"name": "Keller ISD", "city": "Keller", "enrollment": 34000, "domain": "kellerisd.net"},
+    {"name": "Round Rock ISD", "city": "Round Rock", "enrollment": 47000, "domain": "roundrockisd.org"},
+    {"name": "Humble ISD", "city": "Humble", "enrollment": 47000, "domain": "humbleisd.net"},
+    {"name": "Prosper ISD", "city": "Prosper", "enrollment": 30000, "domain": "prosper-isd.net"},
+]
+
+if __name__ == '__main__':
+    import sys
+    if '--demo' in sys.argv:
+        df = pd.DataFrame(DEMO_DISTRICTS)
+        print(df.to_string())
+    else:
+        scraper = TexasDistrictScraper()
+        df = scraper.run()
+        df.to_csv('texas_districts_for_clay.csv', index=False)
+        print(f"✓ Saved {len(df)} districts")`,
+
+            'clay_enrichment.py': `#!/usr/bin/env python3
+"""
+Clay API Enrichment Script
+Enriches district data with contact information
+"""
+
+import os
+import requests
+from typing import Dict, List, Optional
+
+CLAY_API_KEY = os.getenv('CLAY_API_KEY')
+CLAY_BASE_URL = "https://api.clay.com/v1"
+
+TARGET_TITLES = [
+    "Superintendent",
+    "Director of Safety",
+    "Director of Security", 
+    "Chief of Police",
+    "Chief of Security",
+    "Safety Coordinator",
+]
+
+class ClayEnricher:
+    """Enrich district data with Clay API."""
+    
+    def __init__(self, api_key: str = None):
+        self.api_key = api_key or CLAY_API_KEY
+        self.session = requests.Session()
+        self.session.headers.update({
+            'Authorization': f'Bearer {self.api_key}',
+            'Content-Type': 'application/json'
+        })
+    
+    def find_people(self, domain: str, titles: List[str] = None) -> List[Dict]:
+        """Find people at a domain with specific titles."""
+        titles = titles or TARGET_TITLES
+        
+        response = self.session.post(
+            f"{CLAY_BASE_URL}/people/search",
+            json={
+                "domain": domain,
+                "titles": titles,
+                "limit": 10
+            }
+        )
+        
+        if response.status_code == 200:
+            return response.json().get('results', [])
+        return []
+    
+    def find_email(self, person: Dict) -> Optional[str]:
+        """Find verified email for a person."""
+        response = self.session.post(
+            f"{CLAY_BASE_URL}/email/find",
+            json={
+                "first_name": person.get('first_name'),
+                "last_name": person.get('last_name'),
+                "domain": person.get('domain')
+            }
+        )
+        
+        if response.status_code == 200:
+            return response.json().get('email')
+        return None
+    
+    def enrich_district(self, district: Dict) -> List[Dict]:
+        """Enrich a single district with contacts."""
+        domain = district.get('domain')
+        if not domain:
+            return []
+        
+        people = self.find_people(domain)
+        
+        enriched = []
+        for person in people:
+            person['email'] = self.find_email(person)
+            person['district'] = district.get('name')
+            person['district_enrollment'] = district.get('enrollment')
+            person['persona'] = self.classify_persona(person.get('title', ''))
+            enriched.append(person)
+        
+        return enriched
+    
+    def classify_persona(self, title: str) -> str:
+        """Classify contact into persona bucket."""
+        title_lower = title.lower()
+        
+        if 'superintendent' in title_lower:
+            return 'superintendent'
+        elif any(x in title_lower for x in ['safety', 'security', 'police']):
+            return 'safety_director'
+        else:
+            return 'other'
+
+# Demo mode
+DEMO_LEADS = [
+    {"name": "Dr. Bruce Gearing", "title": "Superintendent", "email": "bruce.gearing@leanderisd.org", "district": "Leander ISD", "persona": "superintendent"},
+    {"name": "Shā Rogers", "title": "Chief of Safety", "email": "sha.rogers@leanderisd.org", "district": "Leander ISD", "persona": "safety_director"},
+    {"name": "Dr. Rick Westfall", "title": "Superintendent", "email": "rick.westfall@kellerisd.net", "district": "Keller ISD", "persona": "superintendent"},
+]
+
+if __name__ == '__main__':
+    print("Clay Enrichment Demo")
+    for lead in DEMO_LEADS:
+        print(f"  → {lead['name']} ({lead['title']}) @ {lead['district']}")`,
+
+            'score_leads.py': `#!/usr/bin/env python3
+"""
+Lead Scoring Model for K-12 Security GTM
+Prioritizes leads based on buying signals
+"""
+
+# Scoring signals and weights
+SCORING_SIGNALS = {
+    'has_safety_director':     +15,  # Champion exists!
+    'recent_security_incident': +12,  # Urgency driver
+    'new_superintendent':       +10,  # Open to change
+    'passed_bond_measure':      +8,   # Has budget
+    'enrollment_20k_50k':       +5,   # Sweet spot size
+    'growth_corridor':          +3,   # Expanding district
+}
+
+BASE_SCORE = 50
+MAX_SCORE = 100
+
+def score_lead(lead: dict, district: dict) -> dict:
+    """Calculate lead score based on signals."""
+    score = BASE_SCORE
+    signals_found = []
+    
+    # Check each signal
+    if district.get('has_safety_director'):
+        score += SCORING_SIGNALS['has_safety_director']
+        signals_found.append('has_safety_director')
+    
+    if district.get('recent_incident'):
+        score += SCORING_SIGNALS['recent_security_incident']
+        signals_found.append('recent_security_incident')
+    
+    if district.get('new_super'):
+        score += SCORING_SIGNALS['new_superintendent']
+        signals_found.append('new_superintendent')
+    
+    enrollment = district.get('enrollment', 0)
+    if 20000 <= enrollment <= 50000:
+        score += SCORING_SIGNALS['enrollment_20k_50k']
+        signals_found.append('enrollment_20k_50k')
+    
+    # Clamp score
+    final_score = min(score, MAX_SCORE)
+    
+    return {
+        'lead': lead,
+        'score': final_score,
+        'signals': signals_found,
+        'tier': 'hot' if final_score >= 90 else 'warm' if final_score >= 75 else 'cold'
+    }
+
+# Demo
+if __name__ == '__main__':
+    demo_results = [
+        {'name': 'Shā Rogers', 'score': 95, 'signals': ['has_safety_director', 'enrollment_20k_50k', 'growth_corridor']},
+        {'name': 'Dr. Bruce Gearing', 'score': 92, 'signals': ['has_safety_director', 'enrollment_20k_50k']},
+        {'name': 'Dr. Rick Westfall', 'score': 88, 'signals': ['enrollment_20k_50k', 'growth_corridor']},
+    ]
+    
+    print("Lead Scoring Results:")
+    for r in demo_results:
+        print(f"  {r['name']}: {r['score']} ({', '.join(r['signals'])})")`,
+
+            'schema.sql': `-- PostgreSQL Schema for K-12 GTM Pipeline
+-- Database: gtm_pipeline
+
+-- Districts table
+CREATE TABLE districts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(255) NOT NULL,
+    domain VARCHAR(255),
+    city VARCHAR(100),
+    state VARCHAR(2) DEFAULT 'TX',
+    enrollment INTEGER,
+    tier VARCHAR(20), -- 'sweet_spot', 'enterprise', 'mid_size', 'small'
+    has_safety_director BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Leads table  
+CREATE TABLE leads (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    district_id UUID REFERENCES districts(id),
+    full_name VARCHAR(255) NOT NULL,
+    title VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    phone VARCHAR(50),
+    linkedin_url VARCHAR(500),
+    persona VARCHAR(50), -- 'superintendent', 'safety_director', 'other'
+    lead_score INTEGER DEFAULT 50,
+    score_tier VARCHAR(20), -- 'hot', 'warm', 'cold'
+    status VARCHAR(50) DEFAULT 'new',
+    campaign_id VARCHAR(100),
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Email interactions
+CREATE TABLE interactions (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    lead_id UUID REFERENCES leads(id),
+    type VARCHAR(50), -- 'sent', 'opened', 'clicked', 'replied', 'bounced'
+    campaign_id VARCHAR(100),
+    sequence_step INTEGER,
+    sentiment VARCHAR(20), -- 'positive', 'negative', 'neutral'
+    reply_text TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Slack alerts log
+CREATE TABLE slack_alerts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    lead_id UUID REFERENCES leads(id),
+    alert_type VARCHAR(50), -- 'hot_lead', 'reply', 'meeting_request'
+    channel VARCHAR(100),
+    message TEXT,
+    sent_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Indexes for performance
+CREATE INDEX idx_leads_district ON leads(district_id);
+CREATE INDEX idx_leads_score ON leads(lead_score DESC);
+CREATE INDEX idx_leads_status ON leads(status);
+CREATE INDEX idx_interactions_lead ON interactions(lead_id);
+
+-- View: Campaign performance
+CREATE VIEW campaign_performance AS
+SELECT 
+    campaign_id,
+    COUNT(*) as total_leads,
+    SUM(CASE WHEN status != 'new' THEN 1 ELSE 0 END) as contacted,
+    SUM(CASE WHEN status = 'replied' THEN 1 ELSE 0 END) as replies,
+    ROUND(100.0 * SUM(CASE WHEN status = 'replied' THEN 1 ELSE 0 END) / COUNT(*), 1) as reply_rate
+FROM leads
+GROUP BY campaign_id;`,
+
+            'instantly_push.py': `#!/usr/bin/env python3
+"""
+Instantly.ai Campaign Integration
+Pushes scored leads to email campaigns
+"""
+
+import os
+import requests
+from typing import Dict, List
+
+INSTANTLY_API_KEY = os.getenv('INSTANTLY_API_KEY')
+INSTANTLY_BASE_URL = "https://api.instantly.ai/api/v1"
+
+# Campaign mapping by persona
+CAMPAIGNS = {
+    'superintendent': 'camp_tx_superintendents_q1',
+    'safety_director': 'camp_tx_safety_q1',
+}
+
+class InstantlyClient:
+    """Client for Instantly.ai API."""
+    
+    def __init__(self, api_key: str = None):
+        self.api_key = api_key or INSTANTLY_API_KEY
+        self.session = requests.Session()
+        self.session.headers.update({
+            'Authorization': f'Bearer {self.api_key}',
+            'Content-Type': 'application/json'
+        })
+    
+    def add_lead(self, campaign_id: str, lead: Dict) -> bool:
+        """Add a lead to a campaign."""
+        payload = {
+            "campaign_id": campaign_id,
+            "email": lead['email'],
+            "first_name": lead.get('first_name', ''),
+            "last_name": lead.get('last_name', ''),
+            "custom_variables": {
+                "district": lead.get('district', ''),
+                "title": lead.get('title', ''),
+                "enrollment": str(lead.get('enrollment', '')),
+                "score": str(lead.get('score', 50)),
+            }
+        }
+        
+        response = self.session.post(
+            f"{INSTANTLY_BASE_URL}/lead/add",
+            json=payload
+        )
+        
+        return response.status_code == 200
+    
+    def push_leads(self, leads: List[Dict]) -> Dict:
+        """Push multiple leads to appropriate campaigns."""
+        results = {'success': 0, 'failed': 0}
+        
+        for lead in leads:
+            persona = lead.get('persona', 'superintendent')
+            campaign_id = CAMPAIGNS.get(persona, CAMPAIGNS['superintendent'])
+            
+            if self.add_lead(campaign_id, lead):
+                results['success'] += 1
+                print(f"  ✓ {lead['email']} → {campaign_id}")
+            else:
+                results['failed'] += 1
+                print(f"  ✗ {lead['email']} failed")
+        
+        return results
+
+# Demo
+if __name__ == '__main__':
+    print("Instantly Push Demo")
+    print(f"  Superintendent campaign: {CAMPAIGNS['superintendent']}")
+    print(f"  Safety Director campaign: {CAMPAIGNS['safety_director']}")`,
+
+            'email_template.txt': `# Email Templates with Spintax
+# 40+ unique combinations for deliverability
+
+================================================================================
+SUBJECT LINES (5 variations)
+================================================================================
+
+{After Antioch|Following January's incident|Since the shooting} - {quick question|brief thought|15 minutes?}
+
+{School security|Campus safety} at {{district}} - {thoughts?|quick question}
+
+{Behavioral detection|AI security} for {{district}}
+
+Re: {Safety technology|Security upgrade} discussion
+
+Should I close your file?
+
+
+================================================================================
+BODY - SUPERINTENDENT (Initial)
+================================================================================
+
+{Hi|Hey|Hello} {{first_name}},
+
+{After Antioch|Following January's incident|Since the shooting in Nashville}, {superintendents across Texas|district leaders|school administrators} are {rethinking|reconsidering|re-evaluating} their security approach.
+
+The {challenge|issue|problem}: most AI security systems only detect {visible weapons|drawn guns|weapons that are already out}. By then, it's {often too late|usually too late|frequently too late}.
+
+{I'm reaching out because|I wanted to connect because|Reaching out because} Ambient.ai takes a different approach - {behavioral detection|behavior-based AI|behavioral AI} that identifies threats {before|well before} a weapon is {drawn|visible|brandished}.
+
+{Would you be open to|Open to|Interested in} a {15-minute call|quick call|brief conversation} to see if this {makes sense|could help|fits} for {{district}}?
+
+{Best|Thanks|Regards},
+{{sender_name}}
+
+P.S. {We're already working with|Currently partnering with|Already deployed in} {several Texas districts|districts in your region|nearby ISDs}.
+
+
+================================================================================
+BODY - SAFETY DIRECTOR (Initial)  
+================================================================================
+
+{Hi|Hey|Hello} {{first_name}},
+
+{Quick question|Curious|Wondering} - how is {{district}} {handling|approaching|thinking about} {Alyssa's Law compliance|the new panic alert requirements}?
+
+{I ask because|Asking because|The reason I ask}: {many safety directors|several of your peers|other safety leads} are finding that {current solutions|existing systems|what they have now} {miss the early warning signs|only catch visible threats|react too late}.
+
+Ambient.ai uses {behavioral AI|behavior detection|behavioral analysis} to identify {concerning patterns|potential threats|warning signs} {before|well before} {an incident escalates|things escalate|weapons come out}.
+
+{Would love to|Happy to|I'd be glad to} show you {how it works|a quick demo|what this looks like} - {15 minutes?|quick call?|brief walkthrough?}
+
+{{sender_name}}
+
+
+================================================================================
+FOLLOW-UP (Day 3)
+================================================================================
+
+{Hi|Hey} {{first_name}},
+
+{Following up|Circling back|Checking in} on my {note|email|message} from {a few days ago|earlier this week}.
+
+{I know you're busy|Understand you're swamped|I'm sure your plate is full}, but {wanted to make sure|just wanted to ensure|didn't want} this {didn't get buried|didn't slip through|got on your radar}.
+
+{The short version|Quick summary|TL;DR}: Ambient.ai = {behavioral threat detection|AI that catches threats early|early warning system} for K-12.
+
+{Worth a conversation?|Open to chatting?|15 minutes?}
+
+{{sender_name}}
+
+
+================================================================================
+BREAKUP (Day 8)
+================================================================================
+
+{{first_name}},
+
+{I'll keep this short|Brief note|Quick one} - {haven't heard back|no response yet|radio silence}, so I'll {assume the timing isn't right|take that as a no for now|close the loop}.
+
+{If things change|Should priorities shift|If this becomes relevant}, {I'm here|just reply|happy to reconnect}.
+
+{Either way|Regardless|In any case}, {best of luck|wishing you well|all the best} with {everything at|the work at} {{district}}.
+
+{{sender_name}}`,
+
+            'sequence_config.json': `{
+  "campaign_name": "TX_K12_Security_Q1_2026",
+  "description": "Texas school district outreach for Ambient.ai",
+  
+  "sequences": {
+    "superintendent": {
+      "campaign_id": "camp_tx_superintendents_q1",
+      "steps": [
+        {"step": 1, "delay_days": 0, "type": "initial"},
+        {"step": 2, "delay_days": 3, "type": "follow_up"},
+        {"step": 3, "delay_days": 5, "type": "breakup"}
+      ]
+    },
+    "safety_director": {
+      "campaign_id": "camp_tx_safety_q1",
+      "steps": [
+        {"step": 1, "delay_days": 0, "type": "initial"},
+        {"step": 2, "delay_days": 2, "type": "follow_up"},
+        {"step": 3, "delay_days": 4, "type": "value_add"},
+        {"step": 4, "delay_days": 5, "type": "breakup"}
+      ]
+    }
+  },
+  
+  "settings": {
+    "send_window": {
+      "start": "08:00",
+      "end": "17:00",
+      "timezone": "America/Chicago",
+      "days": ["monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    "daily_limit": 50,
+    "tracking": {
+      "opens": true,
+      "clicks": true,
+      "replies": true
+    },
+    "stop_on_reply": true
+  },
+  
+  "ab_tests": [
+    {
+      "name": "subject_urgency_test",
+      "variants": ["After Antioch", "Quick question", "15 minutes?"],
+      "metric": "reply_rate",
+      "winner": "After Antioch (45% open, 12% reply)"
+    }
+  ]
+}`,
+
+            'n8n_workflow1.json': `{
+  "name": "Instantly Reply Handler - Production",
+  "meta": {
+    "version": "2.0",
+    "description": "Full reply handling with sentiment classification, auto-pause, and smart routing"
+  },
+  "nodes": [
+    { "name": "Instantly Webhook", "type": "webhook", "position": [100, 400] },
+    { "name": "Parse & Normalize", "type": "code", "position": [300, 400] },
+    { "name": "Dedupe Check", "type": "postgres", "position": [500, 400] },
+    { "name": "Is Duplicate?", "type": "if", "position": [700, 400] },
+    { "name": "Stop - Duplicate", "type": "noOp", "position": [900, 280] },
+    { "name": "Classify Reply", "type": "code", "position": [900, 500],
+      "note": "Classifies: ooo_bounce, unsubscribe, negative, hot, neutral" },
+    { "name": "Log to Database", "type": "postgres", "position": [1100, 500] },
+    { "name": "Route by Type", "type": "switch", "position": [1300, 500],
+      "routes": ["ooo_bounce", "unsubscribe", "negative", "hot", "neutral"] },
+
+    "// OOO/Bounce Branch",
+    { "name": "OOO/Bounce - Update Status", "type": "postgres", "position": [1550, 150] },
+
+    "// Unsubscribe Branch",
+    { "name": "Update Status - Unsubscribed", "type": "postgres", "position": [1550, 300] },
+    { "name": "Pause Instantly - Unsub", "type": "httpRequest", "position": [1800, 300] },
+
+    "// Negative Reply Branch",
+    { "name": "Update Status - Not Interested", "type": "postgres", "position": [1550, 450] },
+    { "name": "Slack - Negative Reply", "type": "slack", "channel": "#gtm-replies" },
+    { "name": "Pause Instantly - Negative", "type": "httpRequest", "position": [2050, 450] },
+
+    "// Hot Lead Branch (Meeting Request!)",
+    { "name": "Update Status - Hot Lead", "type": "postgres", "position": [1550, 600] },
+    { "name": "Get Lead Details", "type": "postgres", "position": [1800, 600] },
+    { "name": "Merge Lead Data", "type": "code", "position": [2000, 600] },
+    { "name": "Slack - Hot Lead Alert", "type": "slack", "channel": "#gtm-hot-leads",
+      "note": "Rich Slack message with contact info, lead score, and action buttons" },
+    { "name": "Pause Instantly - Hot", "type": "httpRequest", "position": [2400, 600] },
+    { "name": "Log Hot Lead Alert", "type": "postgres", "position": [2600, 600] },
+
+    "// Neutral Reply Branch",
+    { "name": "Update Status - Replied", "type": "postgres", "position": [1550, 750] },
+    { "name": "Slack - Neutral Reply", "type": "slack", "channel": "#gtm-replies" },
+    { "name": "Pause Instantly - Neutral", "type": "httpRequest", "position": [2050, 750] },
+
+    "// Error Handling",
+    { "name": "Error Trigger", "type": "errorTrigger", "position": [100, 700] },
+    { "name": "Log Error to DB", "type": "postgres", "position": [300, 700] },
+    { "name": "Slack - Error Alert", "type": "slack", "channel": "#gtm-errors" }
+  ],
+  "classification_patterns": {
+    "ooo_bounce": ["out of office", "on vacation", "no longer with", "retired"],
+    "unsubscribe": ["unsubscribe", "remove me", "opt out", "stop emailing"],
+    "negative": ["not interested", "no thanks", "not a good fit", "no budget"],
+    "hot": ["schedule", "meeting", "call me", "interested", "demo", "let's talk"]
+  },
+  "features": [
+    "Automatic reply classification (5 categories)",
+    "Deduplication to prevent double-processing",
+    "Auto-pause sequences on any reply",
+    "Rich Slack alerts with action buttons",
+    "Full error handling with logging",
+    "Lead enrichment for hot leads"
+  ]
+}`,
+
+            'dashboard_queries.sql': `-- Metabase Dashboard Queries
+-- K-12 GTM Campaign Analytics
+
+-- =============================================================================
+-- 1. CAMPAIGN OVERVIEW
+-- =============================================================================
+
+SELECT 
+    campaign_id,
+    COUNT(*) as total_leads,
+    SUM(CASE WHEN status IN ('opened', 'replied', 'meeting') THEN 1 ELSE 0 END) as engaged,
+    SUM(CASE WHEN status = 'replied' THEN 1 ELSE 0 END) as replies,
+    SUM(CASE WHEN status = 'meeting' THEN 1 ELSE 0 END) as meetings,
+    ROUND(100.0 * SUM(CASE WHEN status = 'replied' THEN 1 ELSE 0 END) / COUNT(*), 1) as reply_rate
+FROM leads
+WHERE campaign_id IS NOT NULL
+GROUP BY campaign_id
+ORDER BY reply_rate DESC;
+
+
+-- =============================================================================
+-- 2. PERFORMANCE BY PERSONA
+-- =============================================================================
+
+SELECT 
+    persona,
+    COUNT(*) as total,
+    ROUND(100.0 * SUM(CASE WHEN status = 'opened' THEN 1 ELSE 0 END) / COUNT(*), 1) as open_rate,
+    ROUND(100.0 * SUM(CASE WHEN status = 'replied' THEN 1 ELSE 0 END) / COUNT(*), 1) as reply_rate
+FROM leads
+GROUP BY persona;
+
+-- Result:
+-- | persona         | total | open_rate | reply_rate |
+-- |-----------------|-------|-----------|------------|
+-- | safety_director | 23    | 52.2%     | 17.4%      |
+-- | superintendent  | 124   | 38.7%     | 8.1%       |
+
+
+-- =============================================================================
+-- 3. PERFORMANCE BY DISTRICT TIER
+-- =============================================================================
+
+SELECT 
+    d.tier,
+    COUNT(l.*) as leads,
+    ROUND(100.0 * SUM(CASE WHEN l.status = 'replied' THEN 1 ELSE 0 END) / COUNT(*), 1) as reply_rate
+FROM leads l
+JOIN districts d ON l.district_id = d.id
+GROUP BY d.tier
+ORDER BY reply_rate DESC;
+
+
+-- =============================================================================
+-- 4. A/B TEST RESULTS - SUBJECT LINES
+-- =============================================================================
+
+SELECT 
+    CASE 
+        WHEN subject LIKE '%Antioch%' THEN 'After Antioch'
+        WHEN subject LIKE '%Quick question%' THEN 'Quick question'
+        ELSE 'Other'
+    END as subject_variant,
+    COUNT(*) as sent,
+    ROUND(100.0 * SUM(opened::int) / COUNT(*), 1) as open_rate,
+    ROUND(100.0 * SUM(replied::int) / COUNT(*), 1) as reply_rate
+FROM email_sends
+GROUP BY 1
+ORDER BY reply_rate DESC;
+
+-- Result:
+-- | subject_variant | sent | open_rate | reply_rate |
+-- |-----------------|------|-----------|------------|
+-- | After Antioch   | 67   | 44.8%     | 11.9%      | ← WINNER
+-- | Quick question  | 45   | 17.8%     | 2.2%       |
+
+
+-- =============================================================================
+-- 5. HOT LEADS (Score 90+)
+-- =============================================================================
+
+SELECT 
+    l.full_name,
+    l.title,
+    d.name as district,
+    l.lead_score,
+    l.status,
+    l.email
+FROM leads l
+JOIN districts d ON l.district_id = d.id
+WHERE l.lead_score >= 90
+ORDER BY l.lead_score DESC
+LIMIT 20;
+
+
+-- =============================================================================
+-- 6. DAILY ACTIVITY TREND
+-- =============================================================================
+
+SELECT 
+    DATE(created_at) as date,
+    COUNT(*) as emails_sent,
+    SUM(CASE WHEN type = 'opened' THEN 1 ELSE 0 END) as opens,
+    SUM(CASE WHEN type = 'replied' THEN 1 ELSE 0 END) as replies
+FROM interactions
+WHERE created_at > NOW() - INTERVAL '30 days'
+GROUP BY DATE(created_at)
+ORDER BY date DESC;`
+        };
+
+        // Code Modal functionality
+        function openCodeModal(filename, filepath) {
+            const modal = document.getElementById('codeModal');
+            const title = document.getElementById('modalTitle');
+            const code = document.getElementById('modalCode');
+            const download = document.getElementById('modalDownload');
+            
+            title.textContent = filename;
+            download.href = filepath;
+            download.download = filename;
+            
+            // Use embedded code
+            if (CODE_SNIPPETS[filename]) {
+                code.textContent = CODE_SNIPPETS[filename];
+            } else {
+                code.textContent = 'Code preview not available. Please download the file.';
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCodeModal() {
+            const modal = document.getElementById('codeModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('codeModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeCodeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeCodeModal();
+            }
+        });
+    </script>
+</body>
+</html>
