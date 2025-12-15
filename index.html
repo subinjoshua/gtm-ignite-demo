@@ -456,6 +456,11 @@
             color: var(--text-muted);
         }
 
+        .badge-red {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+
         /* Accordion */
         .accordion {
             margin: 1rem 0 0.5rem;
@@ -900,6 +905,10 @@
                 <div class="nav-dropdown">
                     <span class="nav-link nav-dropdown-trigger">Data <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"/></svg></span>
                     <div class="nav-dropdown-menu">
+                        <a href="./data/Directory.csv" download class="nav-dropdown-item" style="background: rgba(163, 230, 53, 0.1); border-left: 3px solid var(--accent-lime);">
+                            <strong style="color: var(--accent-lime);">TEA Directory - 9,732 Contacts <span class="badge badge-lime" style="font-size: 0.65rem; padding: 0.15rem 0.4rem; margin-left: 0.5rem;">FREE</span></strong>
+                            <span>Official Texas school contacts - $0 cost</span>
+                        </a>
                         <a href="./data/texas_districts_for_clay.csv" download class="nav-dropdown-item">
                             <strong>Texas Districts</strong>
                             <span>All districts</span>
@@ -1197,7 +1206,7 @@
                         <div class="accordion-title">
                             <span class="step-num">05</span>
                             <span class="step-icon">🧱</span>
-                            <span>Clay API Enrichment</span>
+                            <span>Clay API Enrichment <span class="badge badge-red">PAID</span></span>
                         </div>
                         <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
                     </div>
@@ -1212,6 +1221,35 @@
                                 <a href="./code/clay_enrichment.py" download class="file-link">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                                     Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="accordion-title">
+                            <span class="step-num">05b</span>
+                            <span class="step-icon">🆓</span>
+                            <span>Free Data Alternative <span class="badge badge-lime">FREE</span></span>
+                        </div>
+                        <svg class="accordion-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <strong>Zero-cost alternative to Clay enrichment:</strong>
+                            <ul style="margin: 0.75rem 0; padding-left: 1.5rem; line-height: 1.8;">
+                                <li><a href="https://tealprod.tea.state.tx.us/Tea.AskTed.Web/Forms/" target="_blank" style="color: var(--accent-lime);">Texas AskTED Directory</a> — Official TEA database with all school district contacts</li>
+                                <li><a href="https://webhound.ai" target="_blank" style="color: var(--accent-lime);">Webhound.ai</a> — Web scraping tool to extract contact data at scale</li>
+                            </ul>
+                            <div style="margin-top: 0.75rem; padding: 0.75rem; background: rgba(163, 230, 53, 0.1); border-radius: 6px; border-left: 3px solid var(--accent-lime);">
+                                <strong style="color: var(--accent-lime);">Result:</strong> Scraped <strong>9,732 contacts</strong> using this method (before filtering for our 98 target districts)
+                            </div>
+                            <div class="file-links" style="margin-top: 1rem;">
+                                <a href="./data/Directory.csv" download class="file-link" style="background: var(--accent-lime); color: #000; font-weight: 600;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    Download 9,732 Contacts (FREE)
                                 </a>
                             </div>
                         </div>
